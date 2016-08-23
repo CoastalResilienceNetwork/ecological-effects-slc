@@ -1,0 +1,45 @@
+{
+    "pluginName": "Ecosystem Effects of Sea Level Change",
+	"pluginWidth": 420,
+	"pluginHeight": 400,
+	"legendName": "Habitat Type",
+	"buttons": [{"title": "Strategy Definitions", "url": "resources/docs/Strategy_Definitions.pdf"},{"title": "Project Type Definitions", "url": "resources/docs/Project_Type_Definitions.pdf"}],
+	"mainText": "Use this menu below to change the variety of CT resilience project points. Click any point to learn more about a project.",
+	"methods": "plugins/natural_defenses/Online_Database_Methods.pdf",
+	"projectDesc": "http://www.snap.is/groups/coastal-defenses/",
+    "mapServer": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Connecticut/Southern_CT_Projects/MapServer",
+	"defaultLegendItem": "Projects",
+	"fieldSelected": "",
+	"attributeSelected": "",
+	"idenAtts": "",
+	"idenGraphic": "",
+	"tabSelected": "",
+	"showAll": "",
+	"regions": [
+		{
+			"name": "Kiholo",
+			selectedTab: 0,
+			"tabs": [
+						{
+							"name": "Anchialine Pools",
+							"sliders": [
+										{
+											"name": "Choose SLR",
+										},
+										{
+											"name": "Choose Scenario Year",
+										}										
+							]
+						},
+						{
+							"name": "Fish Ponds",
+							"disabled": true						
+						}
+					]
+		},
+		{
+			"name": "Region 2"
+		}
+	],
+	combos: ""
+}
