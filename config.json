@@ -1,7 +1,7 @@
 {
     "pluginName": "Ecosystem Effects of Sea Level Change",
-	"pluginWidth": 420,
-	"pluginHeight": 400,
+	"pluginWidth": 500,
+	"pluginHeight": 600,
 	"legendName": "Habitat Type",
 	"buttons": [{"title": "Strategy Definitions", "url": "resources/docs/Strategy_Definitions.pdf"},{"title": "Project Type Definitions", "url": "resources/docs/Project_Type_Definitions.pdf"}],
 	"mainText": "Use this menu below to change the variety of CT resilience project points. Click any point to learn more about a project.",
@@ -18,16 +18,43 @@
 	"regions": [
 		{
 			"name": "Kiholo",
-			selectedTab: 0,
+			"selectedTab": 0,
 			"tabs": [
 						{
 							"name": "Anchialine Pools",
 							"sliders": [
 										{
 											"name": "Choose SLR",
+											"values": [{"name":"Current"},{"name":"Low"},{"name":"Medium"},{"name":"High"}]
 										},
 										{
 											"name": "Choose Scenario Year",
+											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
+										}										
+							]
+						},
+						{
+							"name": "Fish Ponds",
+							"disabled": true						
+						},
+						{
+							"name": "Infrastructure",
+							"disabled": true						
+						}
+					]
+		},
+		{
+			"name": "Region 2",
+			"selectedTab": 0,
+			"tabs": [
+						{
+							"name": "Anchialine Pool",
+							"sliders": [
+										{
+											"name": "Choose SLR"
+										},
+										{
+											"name": "Choose Scenario Year"
 										}										
 							]
 						},
@@ -36,9 +63,6 @@
 							"disabled": true						
 						}
 					]
-		},
-		{
-			"name": "Region 2"
 		}
 	],
 	combos: ""
