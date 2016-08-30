@@ -13,29 +13,41 @@
 	"attributeSelected": "",
 	"idenAtts": "",
 	"idenGraphic": "",
-	"tabSelected": "",
 	"showAll": "",
 	"regions": [
 		{
 			"name": "Kiholo",
 			"selectedTab": 0,
+			"selected": true,
 			"tabs": [
 						{
 							"name": "Anchialine Pools",
 							"sliders": [
 										{
 											"name": "Choose SLR",
+											"selected": 3,
+											"values": [{"name":"Current","value":"CURRENT"},{"name":"Low","value":"LOW"},{"name":"Medium","value":"MED"},{"name":"High", "value": "HIGH"}]
+										},
+										{
+											"name": "Choose Scenario Year",
+											"values": [{"name":"2025", "value": "2025"},{"name":"2035", "value": "2035"},{"name":"2050", "value": "2050"},{"name":"2080", "value": "2080"}]
+										}										
+							]
+						},
+						{
+							"name": "Fish Ponds",
+							"disabled": true,
+							"sliders": [
+										{
+											"name": "Choose SLR",
+											"selected": 2,
 											"values": [{"name":"Current"},{"name":"Low"},{"name":"Medium"},{"name":"High"}]
 										},
 										{
 											"name": "Choose Scenario Year",
 											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
 										}										
-							]
-						},
-						{
-							"name": "Fish Ponds",
-							"disabled": true						
+							]					
 						},
 						{
 							"name": "Infrastructure",
@@ -51,15 +63,21 @@
 							"name": "Anchialine Pool",
 							"sliders": [
 										{
-											"name": "Choose SLR"
+											"name": "Choose SLR",
+											"values": [{"name":"Current"},{"name":"Low"},{"name":"Medium"},{"name":"High"}]
 										},
 										{
-											"name": "Choose Scenario Year"
+											"name": "Choose Scenario Year",
+											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
 										}										
 							]
 						},
 						{
-							"name": "Fish Ponds",
+							"name": "Fish Pond",
+							"disabled": true						
+						},
+						{
+							"name": "Infrastructures",
 							"disabled": true						
 						}
 					]
