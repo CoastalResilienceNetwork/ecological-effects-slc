@@ -7,7 +7,7 @@
 	"mainText": "Use this menu below to change the variety of CT resilience project points. Click any point to learn more about a project.",
 	"methods": "plugins/natural_defenses/Online_Database_Methods.pdf",
 	"projectDesc": "http://www.snap.is/groups/coastal-defenses/",
-    "mapServer": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Connecticut/Southern_CT_Projects/MapServer",
+    "mapServer": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Hawaii/Flood_and_SLR/MapServer",
 	"defaultLegendItem": "Projects",
 	"fieldSelected": "",
 	"attributeSelected": "",
@@ -17,6 +17,7 @@
 	"regions": [
 		{
 			"name": "Kiholo",
+			"extent": {"xmin":-1.73613851244E7,"ymin":2254998.539900001,"xmax":-1.7356582148000002E7,"ymax":2257918.5144999996,"spatialReference":{"wkid":102100,"latestWkid":3857}},
 			"selectedTab": 0,
 			"selected": true,
 			"tabs": [
@@ -25,14 +26,28 @@
 							"sliders": [
 										{
 											"name": "Choose SLR",
-											"selected": 3,
+											"selected": 0,
 											"values": [{"name":"Current","value":"CURRENT"},{"name":"Low","value":"LOW"},{"name":"Medium","value":"MED"},{"name":"High", "value": "HIGH"}]
 										},
 										{
 											"name": "Choose Scenario Year",
 											"values": [{"name":"2025", "value": "2025"},{"name":"2035", "value": "2035"},{"name":"2050", "value": "2050"},{"name":"2080", "value": "2080"}]
 										}										
-							]
+							],
+							"combos": {
+								"CURRENT": [2,3],
+								"LOW|2025": [9,10,7,6],
+								"HIGH|2025": [17,18,15,14],
+								"LOW|2035": [25,26,23,22],
+								"MED|2035": [33,34,31,30],
+								"HIGH|2035": [41,42,39,38],
+								"LOW|2050": [49,50,47,46],
+								"MED|2050": [57,58,55,54],
+								"HIGH|2050": [65,66,63,62],
+								"LOW|2080": [73,74,71,70],
+								"MED|2080": [81,82,79,78],
+								"HIGH|2080": [89,90,87,86]
+							}
 						},
 						{
 							"name": "Fish Ponds",
@@ -82,6 +97,5 @@
 						}
 					]
 		}
-	],
-	combos: ""
+	]
 }
