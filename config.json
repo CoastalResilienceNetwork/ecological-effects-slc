@@ -31,6 +31,7 @@
 										},
 										{
 											"name": "Choose Scenario Year",
+											"disable": "CURRENT",
 											"values": [{"name":"2025", "value": "2025"},{"name":"2035", "value": "2035"},{"name":"2050", "value": "2050"},{"name":"2080", "value": "2080"}]
 										}										
 							],

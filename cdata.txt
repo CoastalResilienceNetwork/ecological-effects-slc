@@ -2,6 +2,6 @@ Region	Tab	Name	CURRENT	LOW|2025	HIGH|2025	LOW|2035	MED|2035	HIGH|2035	LOW|2050	
 Kiholo	0	Total Pools	18	98	124	117	128	132	114	132	145	128	145	171
 Kiholo	0	Surface area of all Pools	4163	3780	5640	4632	6356	9620	5264	9620	13900	6356	13900	5692
 Kiholo	0	Surface area of Largest Pool	1663	900	1516	1124	1708	1832	1296	1832	5128	1708	5128	668
-Kiholo	0	% Pools Smaller than 10m2	39	58	59	59	54	51	64	51	61	54	61	53
-Kiholo	0	% of Pools with Invasive Fish	0	18	29	29	35	35	29	35	53	35	53	53
+Kiholo	0	Pools Smaller than 10m2	39	58	59	59	54	51	64	51	61	54	61	53
+Kiholo	0	Pools with Invasive Fish	0	18	29	29	35	35	29	35	53	35	53	53
 Kiholo	0	Pools Connected to Ocean	0	14	6	10	26	24	11	24	70	26	41	29

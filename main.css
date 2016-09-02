@@ -153,11 +153,12 @@ margin: 35px;
 }
 
 .bar--current {
-  fill: lightblue;
+  fill: white;
 }
 
 .label {
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 15px;
 }
 
 .bar--negative {
@@ -181,4 +182,16 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: white;
   font: 10px sans-serif;
   text-anchor: end;
+}
+
+.y text {
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.d3Title {
+	min-height: 16px;
+	text-align: center;
+	font: 14px sans-serif;
+	font-weight: bold;
 }
