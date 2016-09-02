@@ -1,0 +1,7 @@
+Region,Tab,Name,Units,CURRENT,LOW|2025,HIGH|2025,LOW|2035,MED|2035,HIGH|2035,LOW|2050,MED|2050,HIGH|2050,LOW|2080,MED|2080,HIGH|2080
+Kiholo,0,Total Pools,pools,18,98,124,117,128,132,114,132,145,128,145,171
+Kiholo,0,Surface area of all Pools,m<sup>2</sup>,4163,3780,5640,4632,6356,9620,5264,9620,13900,6356,13900,5692
+Kiholo,0,Surface area of Largest Pool,m<sup>2</sup>,1663,900,1516,1124,1708,1832,1296,1832,5128,1708,5128,668
+Kiholo,0,Pools Smaller than 10m2,pools,7,57,73,69,69,67,73,67,88,69,88,91
+Kiholo,0,Pools with Invasive Fish,pools,0,14,7,12,33,32,13,32,102,33,59,50
+Kiholo,0,Pools Connected to Ocean,pools,0,18,36,34,45,46,33,46,77,45,77,91
