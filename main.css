@@ -154,7 +154,7 @@ margin: 35px;
 }
 
 .bar--positive {
-  fill: green;
+  fill: #33cc33;
 }
 
 .bar--current {
@@ -198,14 +198,14 @@ font-size: 15px;
 .d3Title {
 	height: 18px;
 	text-align: center;
-	font: 14px sans-serif;
+	font: 18px sans-serif;
 	font-weight: bold;
 }
 
 .d3Title sup { vertical-align: top; font-size: 0.6em; }
 
 .eeLoss {color: red}
-.eeGain {color: green}
+.eeGain {color: #33cc33}
 
 .sliderWrap {
 	height:70px;
