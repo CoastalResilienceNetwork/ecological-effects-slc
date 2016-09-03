@@ -1,8 +1,7 @@
 {
     "css": [
         "//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css",
-        "//cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css",
-		"//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css"
+        "//cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css"
     ],
     "use": {
         "underscore": { "attach": "_" },
