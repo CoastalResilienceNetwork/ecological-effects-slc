@@ -27,7 +27,7 @@
 										{
 											"name": "Choose SLR",
 											"selected": 0,
-											"values": [{"name":"Current","value":"CURRENT"},{"name":"Low","value":"LOW"},{"name":"Medium","value":"MED"},{"name":"High", "value": "HIGH"}]
+											"values": [{"name":"Current","value":"CURRENT"},{"name":"Low","value":"LOW", "help": "Lower flood elevation<br>Higher likelihood of occurrence"},{"name":"Medium","value":"MED", "help" : "Medium flood elevation<br>Medium likelihood of occurrence"},{"name":"High", "value": "HIGH", "help": "Higher flood elevation<br>Lower likelihood of occurrence"}]
 										},
 										{
 											"name": "Choose Scenario Year",

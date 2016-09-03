@@ -134,6 +134,11 @@ overflow: hidden;
 margin-top: 8px;	
 }
 
+.plugin-eeslc .dijitRuleLabelH {
+white-space: nowrap;	
+}
+
+
 .eeSliderHeader {
 margin-bottom: 10px;
 font-weight: bold;	
@@ -202,3 +207,55 @@ font-size: 15px;
 .eeLoss {color: red}
 .eeGain {color: green}
 
+.sliderWrap {
+	height:70px;
+	padding-left: 20px;
+}
+
+/* base CSS element */
+.ee-tooltip {
+position:absolute;
+display:none;
+z-index: 10;
+padding: 10px;
+border-radius: 5px;
+max-height:400px; 
+max-width:250px; 
+left:0px; 
+top:0px; 
+background-color: #444444; 
+border: 1px solid #cccccc;
+color: #ffffff;
+font-size: 13px;
+font-weight: normal;
+text-align:center;
+}
+.ee-tooltip span {
+display:inline-block;
+vertical-align:middle;
+text-align:center;
+}
+
+.ee-tooltip:after, .ee-tooltip:before {
+top: 100%;
+left: 50%;
+border: solid transparent;
+content: " ";
+height: 0;
+width: 0;
+position: absolute;
+pointer-events: none;
+}
+
+.ee-tooltip:after {
+border-color: rgba(68, 68, 68, 0);
+border-top-color: #444;
+border-width: 5px;
+margin-left: -5px;
+}
+.ee-tooltip:before {
+border-color: rgba(204, 204, 204, 0);
+border-top-color: #ccc;
+border-width: 6px;
+margin-left: -6px;
+}
