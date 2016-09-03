@@ -70,33 +70,6 @@
 							"disabled": true						
 						}
 					]
-		},
-		{
-			"name": "Region 2",
-			"selectedTab": 0,
-			"tabs": [
-						{
-							"name": "Anchialine Pool",
-							"sliders": [
-										{
-											"name": "Choose SLR",
-											"values": [{"name":"Current"},{"name":"Low"},{"name":"Medium"},{"name":"High"}]
-										},
-										{
-											"name": "Choose Scenario Year",
-											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
-										}										
-							]
-						},
-						{
-							"name": "Fish Pond",
-							"disabled": true						
-						},
-						{
-							"name": "Infrastructures",
-							"disabled": true						
-						}
-					]
 		}
 	]
 }
