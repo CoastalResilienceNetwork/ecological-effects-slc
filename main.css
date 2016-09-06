@@ -259,3 +259,7 @@ border-top-color: #ccc;
 border-width: 6px;
 margin-left: -6px;
 }
+
+.eeright {
+	float: right;
+}
