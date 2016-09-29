@@ -27,7 +27,7 @@
 										{
 											"name": "Choose SLR",
 											"selected": 0,
-											"values": [{"name":"Current","value":"CURRENT"},{"name":"Low","value":"LOW", "help": "Lower flood elevation<br>Higher likelihood of occurrence"},{"name":"Medium","value":"MED", "help" : "Medium flood elevation<br>Medium likelihood of occurrence"},{"name":"High", "value": "HIGH", "help": "Higher flood elevation<br>Lower likelihood of occurrence"}]
+											"values": [{"name":"Current","value":"CURRENT", "audio": "current.mp3"},{"name":"Low","value":"LOW", "help": "Lower flood elevation<br>Higher likelihood of occurrence", "audio": "low.mp3"},{"name":"Medium","value":"MED", "help" : "Medium flood elevation<br>Medium likelihood of occurrence", "audio": "medium.mp3"},{"name":"High", "value": "HIGH", "help": "Higher flood elevation<br>Lower likelihood of occurrence", "audio": "high.mp3"}]
 										},
 										{
 											"name": "Choose Scenario Year",
@@ -57,7 +57,7 @@
 										{
 											"name": "Choose SLR",
 											"selected": 2,
-											"values": [{"name":"Current"},{"name":"Low"},{"name":"Medium"},{"name":"High"}]
+											"values": [{"name":"Current", "audio": "current.mp3"},{"name":"Low", "audio": "low.mp3"},{"name":"Medium"},{"name":"High", "audio": "high.mp3"}]
 										},
 										{
 											"name": "Choose Scenario Year",
