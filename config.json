@@ -229,7 +229,438 @@
 						}
 					]
 		},
-				{
+			{
+			"name": "North Kiholo",
+			"extent": {"xmin":-1.73573108676E7,"ymin":2257906.037799999,"xmax":-1.73495411377E7,"ymax":2268722.0102000013,"spatialReference":{"wkid":102100,"latestWkid":3857}},
+			"selectedTab": 0,
+			"selected": true,
+			"tabs": [
+						{
+							"name": "Anchialine Pools",
+							"controls": [
+										{
+											"name": "Choose Type of Flooding",
+											"selected": 0,
+											"values": [{"name":"Frequent","value":"Frequent", "audio": "current.mp3"},{"name":"Semi-Frequent","value":"sFrequent", "audio": "low.mp3"},{"name":"Infrequent","value":"Infrequent", "audio": "medium.mp3"},{"name":"Rarely", "value": "Rarely", "audio": "high.mp3"}]
+										},
+										{
+											"name": "Choose Scenario Year",
+											"values": [{"name":"Recent", "value": "Current"},{"name":"2025", "value": "2025"},{"name":"2035", "value": "2035"},{"name":"2050", "value": "2050"},{"name":"2080", "value": "2080"}]
+										},
+										{
+											"name": "<a href='http://media.coastalresilience.org/HI/EESLC_LearnMore.pdf' target='_blank'>Learn More</a>",
+											"class": "eeLearnMore",
+											"type": "text"
+										},
+										{
+											"name": "Select a Risk variable to view:",
+											"type": "dropdown",
+											"selected": 0,
+											"values": [{"name":"Cumulative Risk Score", "value": "FINAL"},
+													   {"name":"Likelihood of invasive species transmission", "value": "INVASIVE"},
+													   {"name":"Potential to be impacted by planned future development", "value": "FUT_DEV"},
+													   {"name":"Need for land protection", "value": "PROTECT"},
+													   {"name":"Likelihood of being inundated by ocean", "value": "OCEAN"},
+													   {"name":"Likelihood of cess pool contamination", "value": "CESS"}
+													   ]
+										}										
+							],
+							"combos": {
+
+								"Frequent|Current|FINAL": {features:[158,164],dynamic:[171,172,173,174]},
+								"sFrequent|Current|FINAL": {features:[158,164],dynamic:[176,177,178,179]},
+								"Infrequent|Current|FINAL": {features:[158,164],dynamic:[181,182,183,184]},
+								"Rarely|Current|FINAL": {features:[158,164],dynamic:[186,187]},
+								
+								"Frequent|2025|FINAL": {features:[189,195],dynamic:[202,203,204,205]},
+								"sFrequent|2025|FINAL": {features:[189,195],dynamic:[207,208,209,210]},
+								"Infrequent|2025|FINAL": {features:[189,195],dynamic:[212,213,214,215]},
+								"Rarely|2025|FINAL": {features:[189,195],dynamic:[217,218]},
+								
+								"Frequent|2035|FINAL": {features:[220,226],dynamic:[233,234,235,236]},
+								"sFrequent|2035|FINAL": {features:[220,226],dynamic:[238,239,240,241]},
+								"Infrequent|2035|FINAL": {features:[220,226],dynamic:[243,244,245,256]},
+								"Rarely|2035|FINAL": {features:[220,226],dynamic:[248,249]},
+								
+								"Frequent|2050|FINAL": {features:[251,257],dynamic:[264,265,266,267]},
+								"sFrequent|2050|FINAL": {features:[251,257],dynamic:[269,270,271,272]},
+								"Infrequent|2050|FINAL": {features:[251,257],dynamic:[274,275,276,277]},
+								"Rarely|2050|FINAL": {features:[251,257],dynamic:[279,280]},
+								
+								"Frequent|2080|FINAL": {features:[282,288],dynamic:[295,296,297,298]},
+								"sFrequent|2080|FINAL": {features:[282,288],dynamic:[300,301,302,303]},
+								"Infrequent|2080|FINAL": {features:[282,288],dynamic:[305,306,307,308]},
+								"Rarely|2080|FINAL": {features:[282,288],dynamic:[310,311]},
+
+								
+								"Frequent|Current|INVASIVE": {features:[159,165],dynamic:[171,172,173,174]},
+								"sFrequent|Current|INVASIVE": {features:[159,165],dynamic:[176,177,178,179]},
+								"Infrequent|Current|INVASIVE": {features:[159,165],dynamic:[181,182,183,184]},
+								"Rarely|Current|INVASIVE": {features:[159,165],dynamic:[186,187]},
+								
+								"Frequent|2025|INVASIVE": {features:[190,196],dynamic:[202,203,204,205]},
+								"sFrequent|2025|INVASIVE": {features:[190,196],dynamic:[207,208,209,210]},
+								"Infrequent|2025|INVASIVE": {features:[190,196],dynamic:[212,213,214,215]},
+								"Rarely|2025|INVASIVE": {features:[190,196],dynamic:[217,218]},
+								
+								"Frequent|2035|INVASIVE": {features:[221,227],dynamic:[233,234,235,236]},
+								"sFrequent|2035|INVASIVE": {features:[221,227],dynamic:[238,239,240,241]},
+								"Infrequent|2035|INVASIVE": {features:[221,227],dynamic:[243,244,245,256]},
+								"Rarely|2035|INVASIVE": {features:[221,227],dynamic:[248,249]},
+								
+								"Frequent|2050|INVASIVE": {features:[252,258],dynamic:[264,265,266,267]},
+								"sFrequent|2050|INVASIVE": {features:[252,258],dynamic:[269,270,271,272]},
+								"Infrequent|2050|INVASIVE": {features:[252,258],dynamic:[274,275,276,277]},
+								"Rarely|2050|INVASIVE": {features:[252,258],dynamic:[279,280]},
+								
+								"Frequent|2080|INVASIVE": {features:[283,289],dynamic:[295,296,297,298]},
+								"sFrequent|2080|INVASIVE": {features:[283,289],dynamic:[300,301,302,303]},
+								"Infrequent|2080|INVASIVE": {features:[283,289],dynamic:[305,306,307,308]},
+								"Rarely|2080|INVASIVE": {features:[283,289],dynamic:[310,311]},
+
+
+								"Frequent|Current|FUT_DEV": {features:[161,167],dynamic:[171,172,173,174]},
+								"sFrequent|Current|FUT_DEV": {features:[161,167],dynamic:[176,177,178,179]},
+								"Infrequent|Current|FUT_DEV": {features:[161,167],dynamic:[181,182,183,184]},
+								"Rarely|Current|FUT_DEV": {features:[161,167],dynamic:[186,187]},
+								
+								"Frequent|2025|FUT_DEV": {features:[192,198],dynamic:[202,203,204,205]},
+								"sFrequent|2025|FUT_DEV": {features:[192,198],dynamic:[207,208,209,210]},
+								"Infrequent|2025|FUT_DEV": {features:[192,198],dynamic:[212,213,214,215]},
+								"Rarely|2025|FUT_DEV": {features:[192,198],dynamic:[217,218]},
+								
+								"Frequent|2035|FUT_DEV": {features:[223,229],dynamic:[233,234,235,236]},
+								"sFrequent|2035|FUT_DEV": {features:[223,229],dynamic:[238,239,240,241]},
+								"Infrequent|2035|FUT_DEV": {features:[223,229],dynamic:[243,244,245,256]},
+								"Rarely|2035|FUT_DEV": {features:[223,229],dynamic:[248,249]},
+								
+								"Frequent|2050|FUT_DEV": {features:[254,260],dynamic:[264,265,266,267]},
+								"sFrequent|2050|FUT_DEV": {features:[254,260],dynamic:[269,270,271,272]},
+								"Infrequent|2050|FUT_DEV": {features:[254,260],dynamic:[274,275,276,277]},
+								"Rarely|2050|FUT_DEV": {features:[254,260],dynamic:[279,280]},
+								
+								"Frequent|2080|FUT_DEV": {features:[285,291],dynamic:[295,296,297,298]},
+								"sFrequent|2080|FUT_DEV": {features:[285,291],dynamic:[300,301,302,303]},
+								"Infrequent|2080|FUT_DEV": {features:[285,291],dynamic:[305,306,307,308]},
+								"Rarely|2080|FUT_DEV": {features:[285,291],dynamic:[310,311]},
+								
+
+								"Frequent|Current|PROTECT": {features:[162,168],dynamic:[171,172,173,174]},
+								"sFrequent|Current|PROTECT": {features:[162,168],dynamic:[176,177,178,179]},
+								"Infrequent|Current|PROTECT": {features:[162,168],dynamic:[181,182,183,184]},
+								"Rarely|Current|PROTECT": {features:[162,168],dynamic:[186,187]},
+								
+								"Frequent|2025|PROTECT": {features:[193,199],dynamic:[202,203,204,205]},
+								"sFrequent|2025|PROTECT": {features:[193,199],dynamic:[207,208,209,210]},
+								"Infrequent|2025|PROTECT": {features:[193,199],dynamic:[212,213,214,215]},
+								"Rarely|2025|PROTECT": {features:[193,199],dynamic:[217,218]},
+								
+								"Frequent|2035|PROTECT": {features:[224,230],dynamic:[233,234,235,236]},
+								"sFrequent|2035|PROTECT": {features:[224,230],dynamic:[238,239,240,241]},
+								"Infrequent|2035|PROTECT": {features:[224,230],dynamic:[243,244,245,256]},
+								"Rarely|2035|PROTECT": {features:[224,230],dynamic:[248,249]},
+								
+								"Frequent|2050|PROTECT": {features:[255,261],dynamic:[264,265,266,267]},
+								"sFrequent|2050|PROTECT": {features:[255,261],dynamic:[269,270,271,272]},
+								"Infrequent|2050|PROTECT": {features:[255,261],dynamic:[274,275,276,277]},
+								"Rarely|2050|PROTECT": {features:[255,261],dynamic:[279,280]},
+								
+								"Frequent|2080|PROTECT": {features:[286,292],dynamic:[295,296,297,298]},
+								"sFrequent|2080|PROTECT": {features:[286,292],dynamic:[300,301,302,303]},
+								"Infrequent|2080|PROTECT": {features:[286,292],dynamic:[305,306,307,308]},
+								"Rarely|2080|PROTECT": {features:[286,292],dynamic:[310,311]},
+
+
+								"Frequent|Current|OCEAN": {features:[160,166],dynamic:[171,172,173,174]},
+								"sFrequent|Current|OCEAN": {features:[160,166],dynamic:[176,177,178,179]},
+								"Infrequent|Current|OCEAN": {features:[160,166],dynamic:[181,182,183,184]},
+								"Rarely|Current|OCEAN": {features:[160,166],dynamic:[186,187]},
+								
+								"Frequent|2025|OCEAN": {features:[191,197],dynamic:[202,203,204,205]},
+								"sFrequent|2025|OCEAN": {features:[191,197],dynamic:[207,208,209,210]},
+								"Infrequent|2025|OCEAN": {features:[191,197],dynamic:[212,213,214,215]},
+								"Rarely|2025|OCEAN": {features:[191,197],dynamic:[217,218]},
+								
+								"Frequent|2035|OCEAN": {features:[222,228],dynamic:[233,234,235,236]},
+								"sFrequent|2035|OCEAN": {features:[222,228],dynamic:[238,239,240,241]},
+								"Infrequent|2035|OCEAN": {features:[222,228],dynamic:[243,244,245,256]},
+								"Rarely|2035|OCEAN": {features:[222,228],dynamic:[248,249]},
+								
+								"Frequent|2050|OCEAN": {features:[253,259],dynamic:[264,265,266,267]},
+								"sFrequent|2050|OCEAN": {features:[253,259],dynamic:[269,270,271,272]},
+								"Infrequent|2050|OCEAN": {features:[253,259],dynamic:[274,275,276,277]},
+								"Rarely|2050|OCEAN": {features:[253,259],dynamic:[279,280]},
+								
+								"Frequent|2080|OCEAN": {features:[284,290],dynamic:[295,296,297,298]},
+								"sFrequent|2080|OCEAN": {features:[284,290],dynamic:[300,301,302,303]},
+								"Infrequent|2080|OCEAN": {features:[284,290],dynamic:[305,306,307,308]},
+								"Rarely|2080|OCEAN": {features:[284,290],dynamic:[310,311]},
+								
+
+								"Frequent|Current|CESS": {features:[163,169],dynamic:[171,172,173,174]},
+								"sFrequent|Current|CESS": {features:[163,169],dynamic:[176,177,178,179]},
+								"Infrequent|Current|CESS": {features:[163,169],dynamic:[181,182,183,184]},
+								"Rarely|Current|CESS": {features:[163,169],dynamic:[186,187]},
+								
+								"Frequent|2025|CESS": {features:[194,200],dynamic:[202,203,204,205]},
+								"sFrequent|2025|CESS": {features:[194,200],dynamic:[207,208,209,210]},
+								"Infrequent|2025|CESS": {features:[194,200],dynamic:[212,213,214,215]},
+								"Rarely|2025|CESS": {features:[194,200],dynamic:[217,218]},
+								
+								"Frequent|2035|CESS": {features:[225,231],dynamic:[233,234,235,236]},
+								"sFrequent|2035|CESS": {features:[225,231],dynamic:[238,239,240,241]},
+								"Infrequent|2035|CESS": {features:[225,231],dynamic:[243,244,245,256]},
+								"Rarely|2035|CESS": {features:[225,231],dynamic:[248,249]},
+								
+								"Frequent|2050|CESS": {features:[256,262],dynamic:[264,265,266,267]},
+								"sFrequent|2050|CESS": {features:[256,262],dynamic:[269,270,271,272]},
+								"Infrequent|2050|CESS": {features:[256,262],dynamic:[274,275,276,277]},
+								"Rarely|2050|CESS": {features:[256,262],dynamic:[279,280]},
+								
+								"Frequent|2080|CESS": {features:[287,293],dynamic:[295,296,297,298]},
+								"sFrequent|2080|CESS": {features:[287,293],dynamic:[300,301,302,303]},
+								"Infrequent|2080|CESS": {features:[287,293],dynamic:[305,306,307,308]},
+								"Rarely|2080|CESS": {features:[287,293],dynamic:[310,311]}
+							}
+						},
+						{
+							"name": "Fish Ponds",
+							"disabled": true,
+							"sliders": [
+										{
+											"name": "Choose SLR",
+											"selected": 2,
+											"values": [{"name":"Current", "audio": "current.mp3"},{"name":"Low", "audio": "low.mp3"},{"name":"Medium"},{"name":"High", "audio": "high.mp3"}]
+										},
+										{
+											"name": "Choose Scenario Year",
+											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
+										}										
+							]					
+						},
+						{
+							"name": "Infrastructure",
+							"disabled": true						
+						}
+					]
+		},
+			{
+			"name": "South Kiholo",
+			"extent": {"xmin":-1.7370518394863218E7,"ymin":2247034.6486086994,"xmax":-1.73640938046114E7,"ymax":2253537.732989222,"spatialReference":{"wkid":102100,"latestWkid":3857}},
+			"selectedTab": 0,
+			"selected": true,
+			"tabs": [
+						{
+							"name": "Anchialine Pools",
+							"controls": [
+										{
+											"name": "Choose Type of Flooding",
+											"selected": 0,
+											"values": [{"name":"Frequent","value":"Frequent", "audio": "current.mp3"},{"name":"Semi-Frequent","value":"sFrequent", "audio": "low.mp3"},{"name":"Infrequent","value":"Infrequent", "audio": "medium.mp3"},{"name":"Rarely", "value": "Rarely", "audio": "high.mp3"}]
+										},
+										{
+											"name": "Choose Scenario Year",
+											"values": [{"name":"Recent", "value": "Current"},{"name":"2025", "value": "2025"},{"name":"2035", "value": "2035"},{"name":"2050", "value": "2050"},{"name":"2080", "value": "2080"}]
+										},
+										{
+											"name": "<a href='http://media.coastalresilience.org/HI/EESLC_LearnMore.pdf' target='_blank'>Learn More</a>",
+											"class": "eeLearnMore",
+											"type": "text"
+										},
+										{
+											"name": "Select a Risk variable to view:",
+											"type": "dropdown",
+											"selected": 0,
+											"values": [{"name":"Cumulative Risk Score", "value": "FINAL"},
+													   {"name":"Likelihood of invasive species transmission", "value": "INVASIVE"},
+													   {"name":"Potential to be impacted by planned future development", "value": "FUT_DEV"},
+													   {"name":"Need for land protection", "value": "PROTECT"},
+													   {"name":"Likelihood of being inundated by ocean", "value": "OCEAN"},
+													   {"name":"Likelihood of cess pool contamination", "value": "CESS"}
+													   ]
+										}										
+							],
+							"combos": {
+
+								"Frequent|Current|FINAL": {features:[314,320],dynamic:[327,328,329,330]},
+								"sFrequent|Current|FINAL": {features:[314,320],dynamic:[332,333,334,335]},
+								"Infrequent|Current|FINAL": {features:[314,320],dynamic:[337,338,339,340]},
+								"Rarely|Current|FINAL": {features:[314,320],dynamic:[342,343]},
+								
+								"Frequent|2025|FINAL": {features:[345,351],dynamic:[358,359,360,361]},
+								"sFrequent|2025|FINAL": {features:[345,351],dynamic:[363,364,365,366]},
+								"Infrequent|2025|FINAL": {features:[345,351],dynamic:[368,369,370,371]},
+								"Rarely|2025|FINAL": {features:[345,351],dynamic:[373,374]},
+								
+								"Frequent|2035|FINAL": {features:[376,382],dynamic:[389,390,391,392]},
+								"sFrequent|2035|FINAL": {features:[376,382],dynamic:[394,395,396,397]},
+								"Infrequent|2035|FINAL": {features:[376,382],dynamic:[399,400,401,402]},
+								"Rarely|2035|FINAL": {features:[376,382],dynamic:[404,405]},
+								
+								"Frequent|2050|FINAL": {features:[407,413],dynamic:[420,421,422,423]},
+								"sFrequent|2050|FINAL": {features:[407,413],dynamic:[425,426,427,428]},
+								"Infrequent|2050|FINAL": {features:[407,413],dynamic:[430,431,432,433]},
+								"Rarely|2050|FINAL": {features:[407,413],dynamic:[435,436]},
+								
+								"Frequent|2080|FINAL": {features:[438,444],dynamic:[451,452,453,454]},
+								"sFrequent|2080|FINAL": {features:[438,444],dynamic:[456,457,458,459]},
+								"Infrequent|2080|FINAL": {features:[438,444],dynamic:[461,462,463,464]},
+								"Rarely|2080|FINAL": {features:[438,444],dynamic:[466,467]},
+
+								
+								"Frequent|Current|INVASIVE": {features:[315,321],dynamic:[327,328,329,330]},
+								"sFrequent|Current|INVASIVE": {features:[315,321],dynamic:[332,333,334,335]},
+								"Infrequent|Current|INVASIVE": {features:[315,321],dynamic:[337,338,339,340]},
+								"Rarely|Current|INVASIVE": {features:[315,321],dynamic:[342,343]},
+								
+								"Frequent|2025|INVASIVE": {features:[346,352],dynamic:[358,359,360,361]},
+								"sFrequent|2025|INVASIVE": {features:[346,352],dynamic:[363,364,365,366]},
+								"Infrequent|2025|INVASIVE": {features:[346,352],dynamic:[368,369,370,371]},
+								"Rarely|2025|INVASIVE": {features:[346,352],dynamic:[373,374]},
+								
+								"Frequent|2035|INVASIVE": {features:[377,383],dynamic:[389,390,391,392]},
+								"sFrequent|2035|INVASIVE": {features:[377,383],dynamic:[394,395,396,397]},
+								"Infrequent|2035|INVASIVE": {features:[377,383],dynamic:[399,400,401,402]},
+								"Rarely|2035|INVASIVE": {features:[377,383],dynamic:[404,405]},
+								
+								"Frequent|2050|INVASIVE": {features:[408,414],dynamic:[420,421,422,423]},
+								"sFrequent|2050|INVASIVE": {features:[408,414],dynamic:[425,426,427,428]},
+								"Infrequent|2050|INVASIVE": {features:[408,414],dynamic:[430,431,432,433]},
+								"Rarely|2050|INVASIVE": {features:[408,414],dynamic:[435,436]},
+								
+								"Frequent|2080|INVASIVE": {features:[439,445],dynamic:[451,452,453,454]},
+								"sFrequent|2080|INVASIVE": {features:[439,445],dynamic:[456,457,458,459]},
+								"Infrequent|2080|INVASIVE": {features:[439,445],dynamic:[461,462,463,464]},
+								"Rarely|2080|INVASIVE": {features:[439,445],dynamic:[466,467]},
+
+
+								"Frequent|Current|FUT_DEV": {features:[317,323],dynamic:[327,328,329,330]},
+								"sFrequent|Current|FUT_DEV": {features:[317,323],dynamic:[332,333,334,335]},
+								"Infrequent|Current|FUT_DEV": {features:[317,323],dynamic:[337,338,339,340]},
+								"Rarely|Current|FUT_DEV": {features:[317,323],dynamic:[342,343]},
+								
+								"Frequent|2025|FUT_DEV": {features:[348,354],dynamic:[358,359,360,361]},
+								"sFrequent|2025|FUT_DEV": {features:[348,354],dynamic:[363,364,365,366]},
+								"Infrequent|2025|FUT_DEV": {features:[348,354],dynamic:[368,369,370,371]},
+								"Rarely|2025|FUT_DEV": {features:[348,354],dynamic:[373,374]},
+								
+								"Frequent|2035|FUT_DEV": {features:[379,385],dynamic:[389,390,391,392]},
+								"sFrequent|2035|FUT_DEV": {features:[379,385],dynamic:[394,395,396,397]},
+								"Infrequent|2035|FUT_DEV": {features:[379,385],dynamic:[399,400,401,402]},
+								"Rarely|2035|FUT_DEV": {features:[379,385],dynamic:[404,405]},
+								
+								"Frequent|2050|FUT_DEV": {features:[410,416],dynamic:[420,421,422,423]},
+								"sFrequent|2050|FUT_DEV": {features:[410,416],dynamic:[425,426,427,428]},
+								"Infrequent|2050|FUT_DEV": {features:[410,416],dynamic:[430,431,432,433]},
+								"Rarely|2050|FUT_DEV": {features:[410,416],dynamic:[435,436]},
+								
+								"Frequent|2080|FUT_DEV": {features:[441,447],dynamic:[451,452,453,454]},
+								"sFrequent|2080|FUT_DEV": {features:[441,447],dynamic:[456,457,458,459]},
+								"Infrequent|2080|FUT_DEV": {features:[441,447],dynamic:[461,462,463,464]},
+								"Rarely|2080|FUT_DEV": {features:[441,447],dynamic:[466,467]},
+								
+
+								"Frequent|Current|PROTECT": {features:[318,324],dynamic:[327,328,329,330]},
+								"sFrequent|Current|PROTECT": {features:[318,324],dynamic:[332,333,334,335]},
+								"Infrequent|Current|PROTECT": {features:[318,324],dynamic:[337,338,339,340]},
+								"Rarely|Current|PROTECT": {features:[318,324],dynamic:[342,343]},
+								
+								"Frequent|2025|PROTECT": {features:[349,355],dynamic:[358,359,360,361]},
+								"sFrequent|2025|PROTECT": {features:[349,355],dynamic:[363,364,365,366]},
+								"Infrequent|2025|PROTECT": {features:[349,355],dynamic:[368,369,370,371]},
+								"Rarely|2025|PROTECT": {features:[349,355],dynamic:[373,374]},
+								
+								"Frequent|2035|PROTECT": {features:[380,386],dynamic:[389,390,391,392]},
+								"sFrequent|2035|PROTECT": {features:[380,386],dynamic:[394,395,396,397]},
+								"Infrequent|2035|PROTECT": {features:[380,386],dynamic:[399,400,401,402]},
+								"Rarely|2035|PROTECT": {features:[380,386],dynamic:[404,405]},
+								
+								"Frequent|2050|PROTECT": {features:[411,417],dynamic:[420,421,422,423]},
+								"sFrequent|2050|PROTECT": {features:[411,417],dynamic:[425,426,427,428]},
+								"Infrequent|2050|PROTECT": {features:[411,417],dynamic:[430,431,432,433]},
+								"Rarely|2050|PROTECT": {features:[411,417],dynamic:[435,436]},
+								
+								"Frequent|2080|PROTECT": {features:[442,448],dynamic:[451,452,453,454]},
+								"sFrequent|2080|PROTECT": {features:[442,448],dynamic:[456,457,458,459]},
+								"Infrequent|2080|PROTECT": {features:[442,448],dynamic:[461,462,463,464]},
+								"Rarely|2080|PROTECT": {features:[442,448],dynamic:[466,467]},
+
+
+								"Frequent|Current|OCEAN": {features:[316,322],dynamic:[327,328,329,330]},
+								"sFrequent|Current|OCEAN": {features:[316,322],dynamic:[332,333,334,335]},
+								"Infrequent|Current|OCEAN": {features:[316,322],dynamic:[337,338,339,340]},
+								"Rarely|Current|OCEAN": {features:[316,322],dynamic:[342,343]},
+								
+								"Frequent|2025|OCEAN": {features:[347,353],dynamic:[358,359,360,361]},
+								"sFrequent|2025|OCEAN": {features:[347,353],dynamic:[363,364,365,366]},
+								"Infrequent|2025|OCEAN": {features:[347,353],dynamic:[368,369,370,371]},
+								"Rarely|2025|OCEAN": {features:[347,353],dynamic:[373,374]},
+								
+								"Frequent|2035|OCEAN": {features:[378,384],dynamic:[389,390,391,392]},
+								"sFrequent|2035|OCEAN": {features:[378,384],dynamic:[394,395,396,397]},
+								"Infrequent|2035|OCEAN": {features:[378,384],dynamic:[399,400,401,402]},
+								"Rarely|2035|OCEAN": {features:[378,384],dynamic:[404,405]},
+								
+								"Frequent|2050|OCEAN": {features:[409,415],dynamic:[420,421,422,423]},
+								"sFrequent|2050|OCEAN": {features:[409,415],dynamic:[425,426,427,428]},
+								"Infrequent|2050|OCEAN": {features:[409,415],dynamic:[430,431,432,433]},
+								"Rarely|2050|OCEAN": {features:[409,415],dynamic:[435,436]},
+								
+								"Frequent|2080|OCEAN": {features:[440,446],dynamic:[451,452,453,454]},
+								"sFrequent|2080|OCEAN": {features:[440,446],dynamic:[456,457,458,459]},
+								"Infrequent|2080|OCEAN": {features:[440,446],dynamic:[461,462,463,464]},
+								"Rarely|2080|OCEAN": {features:[440,446],dynamic:[466,467]},									
+
+
+								"Frequent|Current|CESS": {features:[319,325],dynamic:[327,328,329,330]},
+								"sFrequent|Current|CESS": {features:[319,325],dynamic:[332,333,334,335]},
+								"Infrequent|Current|CESS": {features:[319,325],dynamic:[337,338,339,340]},
+								"Rarely|Current|CESS": {features:[319,325],dynamic:[342,343]},
+								
+								"Frequent|2025|CESS": {features:[350,356],dynamic:[358,359,360,361]},
+								"sFrequent|2025|CESS": {features:[350,356],dynamic:[363,364,365,366]},
+								"Infrequent|2025|CESS": {features:[350,356],dynamic:[368,369,370,371]},
+								"Rarely|2025|CESS": {features:[350,356],dynamic:[373,374]},
+								
+								"Frequent|2035|CESS": {features:[381,387],dynamic:[389,390,391,392]},
+								"sFrequent|2035|CESS": {features:[381,387],dynamic:[394,395,396,397]},
+								"Infrequent|2035|CESS": {features:[381,387],dynamic:[399,400,401,402]},
+								"Rarely|2035|CESS": {features:[381,387],dynamic:[404,405]},
+								
+								"Frequent|2050|CESS": {features:[412,418],dynamic:[420,421,422,423]},
+								"sFrequent|2050|CESS": {features:[412,418],dynamic:[425,426,427,428]},
+								"Infrequent|2050|CESS": {features:[412,418],dynamic:[430,431,432,433]},
+								"Rarely|2050|CESS": {features:[412,418],dynamic:[435,436]},
+								
+								"Frequent|2080|CESS": {features:[443,449],dynamic:[451,452,453,454]},
+								"sFrequent|2080|CESS": {features:[443,449],dynamic:[456,457,458,459]},
+								"Infrequent|2080|CESS": {features:[443,449],dynamic:[461,462,463,464]},
+								"Rarely|2080|CESS": {features:[443,449],dynamic:[466,467]}
+
+							}
+						},
+						{
+							"name": "Fish Ponds",
+							"disabled": true,
+							"sliders": [
+										{
+											"name": "Choose SLR",
+											"selected": 2,
+											"values": [{"name":"Current", "audio": "current.mp3"},{"name":"Low", "audio": "low.mp3"},{"name":"Medium"},{"name":"High", "audio": "high.mp3"}]
+										},
+										{
+											"name": "Choose Scenario Year",
+											"values": [{"name":"2025"},{"name":"2035"},{"name":"2050"},{"name":"2080"}]
+										}										
+							]					
+						},
+						{
+							"name": "Infrastructure",
+							"disabled": true						
+						}
+					]
+		},
+			{
 			"name": "North Kona",
 			"extent": {"xmin":-1.73728541275E7,"ymin":2233327.335000001,"xmax":-1.73681470809E7,"ymax":2246983.9519999996,"spatialReference":{"wkid":102100,"latestWkid":3857}},
 			"selectedTab": 0,
