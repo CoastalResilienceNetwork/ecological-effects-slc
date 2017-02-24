@@ -23,6 +23,13 @@
 	border-color: rgba(8, 98, 144, 1) !important;
 }
 
+.eeLearnMore {
+	color:#494 !important;
+	font-size: 10pt !important;
+	padding:4px !important;	
+	float: right;
+}
+
 .outerEE {
 	padding: 5px;	
 }
