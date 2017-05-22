@@ -1,6 +1,6 @@
 {
     "css": [
-		"plugins/eeslr/css/main.css",
+		"plugins/ecological-effects-slc/css/main.css",
 		"http://rawgit.com/simeydotme/jQuery-ui-Slider-Pips/master/dist/jquery-ui-slider-pips.css",
 		"http://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/jqueryui.min.css"
     ],

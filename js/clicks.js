@@ -93,7 +93,7 @@ function (
 				//Infographic Popup
 				$("#" + t.id + "viewInfoGraphic").on('click',function(c){
 					TINY.box.show({
-						animate: true, url: 'plugins/eeslr/html/info-graphic.html',
+						animate: true, url: 'plugins/ecological-effects-slc/html/info-graphic.html',
 						fixed: true, width: 660, height: 570
 					});		
 				})
