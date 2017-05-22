@@ -1,0 +1,99 @@
+﻿<!--This HTML is used in the render function to build the elements within the plugin. The render function first creates a
+Dijit ContentPane to hold all the elements. The ContentPane is assigned a dynamic id upon creation. The render function
+takes the ContentPane id and prepends it to every element with a declared id in this HTML before the elements are created.
+The unique ContentPane id makes all the element ids unique and prevents duplicate id errors across other apps.-->
+
+<div class="eeslr-app">
+	<div id="tab-wrap" class="">
+		<div id="tabBtns" class="toggle-btn tabBtns" style="width:500px;">
+			<input type="radio" id="dfe2" name="eeslr-dfe" value="showContent" />
+			<label for="dfe2">Anchialine Pools</label>
+			<input type="radio" id="dfe4" name="eeslr-dfe" value="showInfo"/>
+			<label for="dfe4">Info</label>
+		</div>
+	</div>	
+</div>	
+<div id="showContent" class="eeslr-sections">
+	<section>
+	<div>Unless a custom area is drawn, risk scores are summarized for the entire study area and are not based on the zoom extent of your screen.</div>
+	<button id="customAreaButton" class="button button-primary eeslr-right">Draw Custom Area</button>
+	<button id="clearcustomAreaButton" class="button button-warning eeslr-right" style="display:none">Clear Custom Area</button>
+		
+	<br><div class="eeslr-infobuttonhandle" id="-FloodingTypeInfo"><i class="fa fa-info-circle" aria-hidden="true" style="color:#0096d6"></i> Choose Type of Flooding</div>
+		<div class="toggle-btn" style="width:464px;">
+			<input type="radio" id="Frequent" name="flooding" value="Frequent"/>
+			<label for="Frequent">Frequent</label>
+			<input type="radio" id="Semi-Frequent" name="flooding" value="Semi-Frequent"/>
+			<label for="Semi-Frequent">Semi-Frequent</label>
+			<input type="radio" id="Infrequent" name="flooding" value="Infrequent"/>
+			<label for="Infrequent">Infrequent</label>
+			<input type="radio" id="Rarely" name="flooding" value="Rarely"/>
+			<label for="Rarely">Rarely</label>
+			<span class="eeslr-volume" style="width:20px;margin-left:-10px;position: relative;top: 0px;left: 10px;"><i id="sound1" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>			
+		</div>
+	<div class="eeslr-infobuttonhandle" id="-YearInfo"><i class="fa fa-info-circle" aria-hidden="true" style="color:#0096d6"></i> Choose Scenario Year</div>
+		<div class="toggle-btn" style="width:452px;">
+			<input type="radio" id="Recent" name="year" value="Recent"/>
+			<label for="Recent">Recent</label>
+			<input type="radio" id="2025" name="year" value="2025"/>
+			<label for="2025">2025</label>
+			<input type="radio" id="2035" name="year" value="2035"/>
+			<label for="2035">2035</label>
+			<input type="radio" id="2050" name="year" value="2050"/>
+			<label for="2050">2050</label>	
+			<input type="radio" id="2080" name="year" value="2080"/>
+			<label for="2080">2080</label>				
+		</div>
+		<div style="width:100%">
+		 <div id="RiskBox" class="eeChoosers eeChooserBoxUnSelect">Select a Risk variable to view:
+				<div class="chosen-wrap">
+					<select id="Risk" class="chosen eechooser">
+							<option value="FINAL">Cumulative Risk Score</option>
+							<option value="INVASIVE">Likelihood of invasive species transmission</option>
+							<option value="FUT_DEV">Potential to be impacted by planned future development</option>
+							<option value="PROTECT">Need for land protection</option>
+							<option value="OCEAN">Likelihood of being inundated by ocean</option>
+							<option value="CESS">Likelihood of cess pool contamination</option>
+					</select>
+				</div>
+		 </div>
+		<span class="eeslr-volume" style="position: relative;top: -83px;left: 454px;"><i id="sound2" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>
+		</div>
+		<div id="SolutionBox" class="eeChoosers eeChooserBoxUnSelect" style="margin-top:-22px">OR Select a Solution view:
+				<div class="chosen-wrap">
+					<select id="Solution" class="chosen eechooser">
+						<option value="PROTECT">Land Protection Potential</option>
+						<option value="RESTORE">Invasive Fish Removal Priorities</option>
+					</select>
+				</div>
+		</div>
+		<div class="toggle-btn" style="width:463px;">
+			<input type="radio" id="All" name="pools" value="All"/>
+			<label for="All">All Pools</label>
+			<input type="radio" id="Existing" name="pools" value="Existing"/>
+			<label for="Existing">Existing Pools</label>
+			<input type="radio" id="Future" name="pools" value="Future"/>
+			<label for="Future">Future Pools</label>	
+		<span class="eeslr-volume" style="width:20px;margin-left:-10px;position: relative;top: 0px;left: 10px;"><i id="sound3" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>			
+		</div>
+		<div id="d3Title" class="d3Title" style="display: none;">Chart Loading...</div>
+		<div id="d3Area" class="d3Area" style="height: 400px;"></div>
+	</section>
+</div>
+<div id="showInfo" class="eeslr-sections hide">
+	<section>
+		<h2>Documentation</h2>
+		<!-- <h3 class="infoDoc">Overview</h3>
+		<div class="explainWrap">
+			<button id="viewInfoGraphic" class="button button-default">View Overview Graphic</button> 
+		</div>	
+	</section> 
+	<section>	-->
+		<div id="exwrap" class="explainWrap">
+			<h4 class="FloodingTypeInfo">Type of Flooding</h4>
+			<p id="FloodingTypeInfo" class="FloodingTypeInfo">Frequent flooding is expected to occur daily to every other day. Semi-frequent flooding is expected to occur on a weekly to monthly basis. Infrequent flooding might occur one to several times a year. Rare flooding are extreme events that occur once in multiple decades.</p>
+			<h4 class="YearInfo">Scenario Year</h4>
+			<p id="YearInfo" class="YearInfo">Excluding the Recent scenario, each of the scenarios reflect an increase in regional sea level rise linked to projected global increases in mean sea level around the respective time period based on the Fifth Assessment Report of the Intergovernmental Panel on Climate Change (2013).</p>	
+		</div>
+	</section>
+</div>

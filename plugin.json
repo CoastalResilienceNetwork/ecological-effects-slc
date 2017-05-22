@@ -1,7 +1,8 @@
 {
     "css": [
-        "//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css",
-        "//cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css"
+		"plugins/eeslr/css/main.css",
+		"http://rawgit.com/simeydotme/jQuery-ui-Slider-Pips/master/dist/jquery-ui-slider-pips.css",
+		"http://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/jqueryui.min.css"
     ],
     "use": {
         "underscore": { "attach": "_" },
@@ -9,4 +10,3 @@
         "extjs": { "attach": "Ext" }
     }
 }
-
