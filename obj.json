@@ -8,5 +8,7 @@
 	"box": "RiskBox",
 	"risk": "FINAL",
 	"solution": "PROTECT",
-	"clip": ""
+	"clip": "",
+	"showFlood": false,
+	"trans": 70
 }

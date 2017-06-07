@@ -34,22 +34,22 @@ define(["jquery", "use!underscore", "esri/geometry/Polygon", "esri/SpatialRefere
                 pointSymbol: new esri.symbol.SimpleMarkerSymbol(
                     esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10,
                     new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                        new dojo.Color([105, 105, 105]), 1),
-                        new dojo.Color([80, 80, 80, 0.35])),
+                        new dojo.Color([250, 105, 105]), 1),
+                        new dojo.Color([150, 80, 80, 0.70])),
 
                 lineSymbol: new esri.symbol.SimpleLineSymbol(
                         esri.symbol.SimpleLineSymbol.STYLE_DASH,
-                        new dojo.Color([105, 105, 105]), 2),
+                        new dojo.Color([250, 105, 105]), 2),
 
                 polygonSymbol: new esri.symbol.SimpleFillSymbol(
                     esri.symbol.SimpleFillSymbol.STYLE_SOLID,
                     new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                        new dojo.Color([105, 105, 105]), 2),
-                        new dojo.Color([105, 105, 105, 0])),
+                        new dojo.Color([250, 105, 105]), 2),
+                        new dojo.Color([250, 105, 105, 0])),
 
                 hoverLineSymbol: new esri.symbol.SimpleLineSymbol(
                         esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                        new dojo.Color([105, 105, 105]), 2),
+                        new dojo.Color([250, 105, 105]), 2),
 
                 hoverPointSymbol: new esri.symbol.SimpleMarkerSymbol(
                     esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 15,

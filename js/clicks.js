@@ -32,12 +32,11 @@ function (
 					t.infoid = ""
 					t.agsDrawPolygon.on("drawend", function(geo) {t.clicks.modifyFilter(geo,t)});
 					
-					t.legendContainer.innerHTML = "Likelihood of flooding<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(51, 77, 92);stroke-width:3;stroke:rgb(51, 77, 92)' /></svg> Higher<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(69, 178, 157);stroke-width:3;stroke:rgb(69, 178, 157)' /></svg> Lower"
-					
 			},
 			eventListeners: function(t){
 				
 				//select proper items based on obj
+				if (t.obj.showFlood == true) {$("#" + t.id + "showFlood").trigger('click')};
 				$("#" + t.id + t.obj.flooding).trigger('click');
 				$("#" + t.id + t.obj.year).trigger('click');
 				$("#" + t.id + t.obj.pools).trigger('click');
@@ -51,7 +50,7 @@ function (
 				$("#" + t.id + t.obj.box).removeClass( "eeChooserBoxUnSelect" );
 				$("#" + t.id + t.obj.box).addClass( "eeChooserBox" );
 				
-				// setup sounds
+				// setup sounds      
 				var audio1 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/1.mp3");
 				var audio2 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/2.mp3");
 				var audio3 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/3.mp3");
@@ -74,17 +73,17 @@ function (
 				t.audios[1].addEventListener("ended", function() {t.audios[2].play()});
 				t.audios[2].addEventListener("ended", function() {t.clicks.resetAudios(t)});
 				
-				t.audios[4].addEventListener("ended", function() {t.audios[5].play()});
+				t.audios[4].addEventListener("ended", function() {t.audios[3].play()});
+				t.audios[3].addEventListener("ended", function() {t.audios[5].play()});
 				t.audios[5].addEventListener("ended", function() {t.audios[6].play()});
-				t.audios[6].addEventListener("ended", function() {t.audios[7].play()});
-				t.audios[7].addEventListener("ended", function() {t.clicks.resetAudios(t)});
+				t.audios[6].addEventListener("ended", function() {t.clicks.resetAudios(t)});
 				
-				t.audios[7].addEventListener("ended", function() {t.audios[8].play()});
-				t.audios[8].addEventListener("ended", function() {t.audios[9].play()});
-				t.audios[9].addEventListener("ended", function() {t.audios[10].play()});
 				t.audios[10].addEventListener("ended", function() {t.audios[11].play()});
 				t.audios[11].addEventListener("ended", function() {t.audios[12].play()});
 				t.audios[12].addEventListener("ended", function() {t.clicks.resetAudios(t)});
+				
+				t.audios[8].addEventListener("ended", function() {t.audios[9].play()});
+				t.audios[9].addEventListener("ended", function() {t.clicks.resetAudios(t)});
 				
 				var resetAudios = function() {
 					$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
@@ -103,7 +102,8 @@ function (
 					//console.log($(c.target.id));
 					if (tid == "sound1") {if (t.audios[0].duration > 0 && !t.audios[0].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[0].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
 					if (tid == "sound2") {if (t.audios[0].duration > 0 && !t.audios[4].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[4].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
-					if (tid == "sound3") {if (t.audios[0].duration > 0 && !t.audios[7].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[7].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
+					if (tid == "sound3") {if (t.audios[0].duration > 0 && !t.audios[10].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[10].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
+					if (tid == "sound4") {if (t.audios[0].duration > 0 && !t.audios[8].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[8].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
 					t.lastAudio = tid;
 				});
 				// Infographic section clicks
@@ -213,10 +213,32 @@ function (
 				//select the proper tab on startup
 				$("#" + t.id + t.obj.active).trigger('click');
 				
-				t.map.on("zoom-end", function() {if(t.open == "yes") {t.clicks.updateTodas(t)}});
+				$('#' + t.id + 'caveat').hide();
+				t.map.on("zoom-end", function() {if (t.map.getScale() < 10000) {$('#' + t.id + 'caveat').show();} else {$('#' + t.id + 'caveat').hide();};if(t.open == "yes") {t.clicks.updateTodas(t)}});
+
+				$("#" + t.id + "showFlood").change(function() {
+					if(this.checked) {
+						t.obj.showFlood = true;
+					} else {
+						t.obj.showFlood = false;
+					}
+					t.clicks.updateTodas(t);
+				});
 				
+	
+				$("#" + t.id + "transSlider").slider({ min: 0, max: 100, value: t.obj.trans,  change: function(e, ui) {t.obj.trans = ui.value; t.clicks.doTrans(t);}})
+			
+				$("#" + t.id + "methods").on('click', function(c, params) {
+					window.open('http://media.coastalresilience.org/HI/EESLC_Methods.pdf','_newtab');
+				});
 			},
 
+			doTrans: function(t) {
+				
+				if (t.poolsLayer != undefined) {t.poolsLayer.setOpacity(t.obj.trans / 100.0)};					
+				
+			},
+			
 			resetAudios: function(t) {
 				$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
 				$('.volumneicons').removeClass("fa-volume-up").addClass("fa-volume-off");
@@ -225,30 +247,15 @@ function (
 			updateTodas: function(t) {
 				console.log(t.obj);
 				console.log(t.combos.url);
-				
-				if (t.floodLayer == undefined) {
-					t.floodLayer = new ArcGISDynamicMapServiceLayer(t.combos.url,{
-						useMapImage: true
-						}
-					  );
-				t.floodLayer.setVisibleLayers([-1])
-				t.map.addLayer(t.floodLayer);	
-				}
 
+				if (t.featureLayerPoints != undefined) {t.map.removeLayer(t.featureLayerPoints)};
+				if (t.featureLayerPolygons != undefined) {t.map.removeLayer(t.featureLayerPolygons)};
+				
 				var fname = t.obj[t.obj.box.replace("Box","").toLowerCase()] ;
 				console.log(fname);
 				
 				var featuresCombo = t.obj.year + "|" + fname;
-				
-				var layersCombo = t.obj.year + "|" + t.obj.flooding;
-				
 				var featureNumbers = t.combos[featuresCombo];
-				var layerNumbers = t.combos[layersCombo];
-				
-				t.floodLayer.setVisibleLayers(layerNumbers)
-
-				if (t.featureLayerPoints != undefined) {t.map.removeLayer(t.featureLayerPoints)};
-				if (t.featureLayerPolygons != undefined) {t.map.removeLayer(t.featureLayerPolygons)};
 
 				var query = new Query();
 				if (t.obj.pools == "All") {
@@ -309,6 +316,30 @@ function (
 				//queryTask.on("error", queryTaskErrorHandler);
 				queryTask.execute(query);				
 
+
+				if (t.floodLayer == undefined) {
+					t.floodLayer = new ArcGISDynamicMapServiceLayer(t.combos.url,{
+						useMapImage: true
+						}
+					  );
+				t.floodLayer.setVisibleLayers([-1])
+				t.map.addLayer(t.floodLayer);	
+				}
+
+				if (t.obj.showFlood == true) {
+					var layersCombo = t.obj.year + "|" + t.obj.flooding;
+					var layerNumbers = t.combos[layersCombo];
+					
+					t.floodLayer.setVisibleLayers(layerNumbers)
+					t.floodLayer.show()
+					t.legendContainer.innerHTML = "Likelihood of flooding<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(51, 77, 92);stroke-width:3;stroke:rgb(51, 77, 92)' /></svg> Higher<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(69, 178, 157);stroke-width:3;stroke:rgb(69, 178, 157)' /></svg> Lower"
+				} else {
+					t.floodLayer.hide()
+					t.legendContainer.innerHTML = ""
+				}
+			
+				t.clicks.doTrans(t);
+				
 			},
 	
 			modifyFilter: function(geo, t) {
@@ -415,7 +446,7 @@ function (
 
 				$('#' + t.id + 'd3Area').empty();
 
-				var margin = {top: 20, right: 20, bottom: 80, left: 50}
+				var margin = {top: 20, right: 20, bottom: 50, left: 50}
 				
 				t.chart = d3.select('#' + t.id + 'd3Area').append("svg")
 					
@@ -477,14 +508,14 @@ function (
 
 				  g.append("text")
 					.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-					.attr("transform", "translate("+ (width/2) +","+(height-40+(margin.bottom))+")")  // centre below axis
+					.attr("transform", "translate("+ (width/2) +","+(height-10+(margin.bottom))+")")  // centre below axis
 					.text(t.obj.box.replace("Box", "") + " Potential");
 
 				  g.append("text")
 					.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
 					.attr("transform", "translate("+ (15 - margin.left) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
 					.text("Number of Pools");
-
+/*
 				if (other > 0) {
 					  g.append("text")
 						.attr("text-anchor", "left")  // this makes it easy to centre the text as the transform is applied to the anchor
@@ -498,7 +529,7 @@ function (
 						attr("height", 15).
 						attr("width", 25);	
 				}
-					
+*/					
 			},
 			
 			showInfo: function(t){
