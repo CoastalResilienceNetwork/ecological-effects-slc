@@ -235,7 +235,7 @@ function (
 
 			doTrans: function(t) {
 				
-				if (t.poolsLayer != undefined) {t.poolsLayer.setOpacity(t.obj.trans / 100.0)};					
+				if (t.floodLayer != undefined) {t.floodLayer.setOpacity(t.obj.trans / 100.0)};					
 				
 			},
 			

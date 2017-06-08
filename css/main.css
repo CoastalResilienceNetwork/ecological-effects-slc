@@ -228,6 +228,8 @@ label.checkBoxLabels input[type=checkbox]{
 }
 .eeslr-infobuttonhandle{
 	cursor: pointer; cursor: hand;
+	z-index: 2000;
+	position: relative;
 }
 .eeslr-fut-sections > *{
 	padding-left:6px; padding-right:6px;
