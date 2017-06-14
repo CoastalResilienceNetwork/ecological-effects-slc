@@ -428,6 +428,7 @@ function (
 				} else {
 					
 					var allid = allids.join(" OR " + oidf + " = ");
+					if (allids.length == 0) {allid = "-1"}
 					var outq = "(" + owhere + ") AND (" + oidf + " = " + allid + ")"
 					var PolyQoutq = "(" + polyQ + ") AND (" + oidf + " = " + allid + ")"
 					//console.log(outq);
