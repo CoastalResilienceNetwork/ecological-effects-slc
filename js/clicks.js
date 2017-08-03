@@ -212,10 +212,21 @@ function (
 				
 				//select the proper tab on startup
 				$("#" + t.id + t.obj.active).trigger('click');
-				
+			
+				//scale
 				$('#' + t.id + 'caveat').hide();
-				t.map.on("zoom-end", function() {if (t.map.getScale() < 10000) {$('#' + t.id + 'caveat').show();} else {$('#' + t.id + 'caveat').hide();};if(t.open == "yes") {t.clicks.updateTodas(t)}});
+				t.map.on("zoom-end", function() {if (t.map.getScale() < 10000) {
+					
+						$('#' + t.id + 'caveat').show();
+			
+					} else {
+						
+						$('#' + t.id + 'caveat').hide();};
+						
+					if(t.open == "yes") {t.clicks.updateTodas(t)}});
 
+				
+				
 				$("#" + t.id + "showFlood").change(function() {
 					if(this.checked) {
 						t.obj.showFlood = true;
@@ -245,6 +256,7 @@ function (
 			},
 			
 			updateTodas: function(t) {
+
 				console.log(t.obj);
 				console.log(t.combos.url);
 
@@ -255,7 +267,8 @@ function (
 				console.log(fname);
 				
 				var featuresCombo = t.obj.year + "|" + fname;
-				var featureNumbers = t.combos[featuresCombo];
+				//var featureNumbers = t.combos[featuresCombo];
+				var featureNumbers = t.combos[featuresCombo].concat([509]);
 
 				var query = new Query();
 				if (t.obj.pools == "All") {
@@ -335,8 +348,16 @@ function (
 					t.legendContainer.innerHTML = "Likelihood of flooding<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(51, 77, 92);stroke-width:3;stroke:rgb(51, 77, 92)' /></svg> Higher<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(69, 178, 157);stroke-width:3;stroke:rgb(69, 178, 157)' /></svg> Lower"
 				} else {
 					t.floodLayer.hide()
-					t.legendContainer.innerHTML = ""
+					t.legendContainer.innerHTML = ''
+			
 				}
+
+				if (t.map.getScale() < 10000) {
+					
+					t.legendContainer.innerHTML = t.legendContainer.innerHTML + '<div class="item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAALRJREFUOI2t1MENwyAMBVAfkP4MWYHMk64TMg/7ZIXM8G+9ACKEtjbUJwToyQbpO/lzubwAEGYgkqGAAALJXUQigNOAeBHZkiEkg6vOo4i8SKqwZVnW67r2dr8e+RzAtjRRfIDaajGSa/3+JrCHtXfUoAZTg1pMBVqwn6AV+wqOYB/BUawLzmAPcBa7gST9LNZ2mFPDjJH0OaV6nxIt2VhF2FFAkgGApalSqbPjFrAZHRKbegPtOZZIYUnfigAAAABJRU5ErkJggg==" width="20" height="20" title="" alt=""><span class="item-label">Data Removed by Landowner Request</span></div>'
+			
+					} 
+
 			
 				t.clicks.doTrans(t);
 				
