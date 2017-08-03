@@ -35,7 +35,10 @@ function (
 	lang ) {
 	return declare(PluginBase, {
 		// The height and width are set here when an infographic is defined. When the user click Continue it rebuilds the app window with whatever you put in.
-		toolbarName: "Ecosystem Effects of Sea Level Change", showServiceLayersInLegend: true, allowIdentifyWhenActive: false, rendered: false, resizable: false,
+		toolbarName: "Ecosystem Effects of Sea Level Change",
+		allowIdentifyWhenActive: false, 
+		rendered: false, 
+		resizable: false,
 		hasCustomPrint: false, size:'custom', width:500, hasHelp:false,
 		showServiceLayersInLegend: false,
 		// First function called when the user clicks the pluging icon. 
