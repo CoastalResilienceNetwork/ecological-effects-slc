@@ -15,10 +15,8 @@ The unique ContentPane id makes all the element ids unique and prevents duplicat
 </div>	
 <div id="showContent" class="eeslr-sections">
 	<section>
+	<button id="dsummary" class="button button-primary">Download Summary</button>
 		<span class="eeslr-volume" style="position:absolute;top: 0px;left: 460px;"><i id="sound1" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>
-		<div style='margin-bottom:10px;width:450px'>This app enables planners and managers to visualize impacts of future development and rising sea levels on anchialine pools to help prioritize restoration and conservation over time. 
-		<a href='http://coastalresilience.org/project/ecosystem-effects-of-sea-level-change/' target='_blank'>Learn More</a>
-		</div>
 		<div style="width:100%">
 		 <div id="RiskBox" class="eeChoosers eeChooserBoxUnSelect">Select a Risk variable to view:
 				<div class="chosen-wrap">
@@ -124,9 +122,11 @@ The unique ContentPane id makes all the element ids unique and prevents duplicat
 	<section>	-->
 		<div id="exwrap" class="explainWrap">
 			<h4 class="FloodingTypeInfo">Type of Flooding</h4>
-			<p id="FloodingTypeInfo" class="FloodingTypeInfo">Frequent flooding is expected to occur daily to every other day. Semi-frequent flooding is expected to occur on a weekly to monthly basis. Infrequent flooding might occur one to several times a year. Rare flooding are extreme events that occur once in multiple decades.</p>
+			<p id="FloodingTypeInfo" class="FloodingTypeInfo">Frequent flooding is expected to occur daily to every other day. Semi-frequent flooding is expected to occur on a weekly to monthly basis. Infrequent flooding might occur one to several times a year. Rare flooding are extreme events that occur once in multiple decades. 2016 US Army Corps LiDAR data were used to create the flood elevation extents.  Horizontal Positional Accuracy is compiled to meet 1 m at 95% confidence level and Vertical Positional Accuracy of 19.6 cm at a 95% confidence level (10 cm RMSE).</p>
 			<h4 class="YearInfo">Scenario Year</h4>
 			<p id="YearInfo" class="YearInfo">Excluding the Recent scenario, each of the scenarios reflect an increase in regional sea level rise linked to projected global increases in mean sea level around the respective time period based on the Fifth Assessment Report of the Intergovernmental Panel on Climate Change (2013).</p>	
+			<h4 class="RiskInfo">Risk Variables</h4>
+			<p id="RiskInfo" class="RiskInfo">Cumulative risk scores represent a pools percent risk out of the total possible risk calculated by: ([Risk1] + [Risk2] + [Risk3] + [Risk4]/160)*100) This is the sum of the risk scores for each individual risk variable divided by the highest possible risk score, in this case 160 (4 variables with 40 as the highest value). "low" represents pools with scores <20%, "medium" >=20 - 60%, and "high" > 60%. For more information on how each individual risk and solution variable was calculated, visit the <a href='http://coastalresilience.org/project/ecosystem-effects-of-sea-level-change/' target='_newtab'>Coastal Resilience Apps </a> page.</p>		
 		</div>
 	</section>
 </div>

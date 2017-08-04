@@ -242,6 +242,12 @@ function (
 				$("#" + t.id + "methods").on('click', function(c, params) {
 					window.open('http://media.coastalresilience.org/HI/EESLC_Methods.pdf','_newtab');
 				});
+
+				$("#" + t.id + "dsummary").on('click', function(c, params) {
+					window.open('http://media.coastalresilience.org/HI/EESLC_Summary.pdf','_newtab');
+				});				
+				
+				
 			},
 
 			doTrans: function(t) {
