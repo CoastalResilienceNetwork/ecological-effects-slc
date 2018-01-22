@@ -178,7 +178,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 				})
 			})
 			if (t.obj.pools == "Future"){
-				$("#" + t.id + "Recent").prop("disabled", true);
+				$("#" + t.id + "Current").prop("disabled", true);
 			}
 			if (t.obj.year == "Current"){
 				$("#" + t.id + "Future").prop("disabled", true);
