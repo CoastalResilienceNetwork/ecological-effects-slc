@@ -1,14 +1,12 @@
 {
-	"active": "dfe2",
+	"visibleLayers": [-1],
+	"floodLayers": [-1],
+	"refLayers": [],
+	"floodLayersOn": "no",
 	"extent": "",
 	"stateSet": "no",
-	"flooding": "Frequent",
-	"year": "Recent",
-	"pools": "All",
-	"box": "RiskBox",
-	"risk": "FINAL",
-	"solution": "PROTECT",
-	"clip": "",
-	"showFlood": false,
-	"trans": 70
+	"flooding": "Daily",
+	"topVal": "",
+	"year": "Current",
+	"pools": "All"
 }

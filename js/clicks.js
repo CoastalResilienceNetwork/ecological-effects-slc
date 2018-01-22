@@ -1,572 +1,325 @@
 define([
-	"dojo/_base/declare", 
-	"esri/tasks/query", 
-	"esri/tasks/QueryTask", 
-	"esri/layers/FeatureLayer",
-	"esri/layers/ArcGISDynamicMapServiceLayer",
-	"dojo/_base/array",
-	"d3",
-	"../js/AgsDrawPolygon"	
+	"dojo/_base/declare", "esri/tasks/query", "esri/tasks/QueryTask", "esri/layers/FeatureLayer",
+	"esri/layers/ArcGISDynamicMapServiceLayer"
 ],
-function ( 
-	declare, 
-	Query, 
-	QueryTask, 
-	FeatureLayer,
-	ArcGISDynamicMapServiceLayer,
-	array,
-	d3,
-	AgsDrawPolygon		   
-		   ) {
-        "use strict";
+function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer) {
+	"use strict";
 
-        return declare(null, { 
-			appSetup: function(t){
-
-					t.agsDrawPolygon = new AgsDrawPolygon({
-						map: t.map
-					});
-
-					t.agsDrawPolygon.initialize();
-					
-					t.infoid = ""
-					t.agsDrawPolygon.on("drawend", function(geo) {t.clicks.modifyFilter(geo,t)});
-					
-			},
-			eventListeners: function(t){
-				
-				//select proper items based on obj
-				if (t.obj.showFlood == true) {$("#" + t.id + "showFlood").trigger('click')};
-				$("#" + t.id + t.obj.flooding).trigger('click');
-				$("#" + t.id + t.obj.year).trigger('click');
-				$("#" + t.id + t.obj.pools).trigger('click');
-				
-				$("#" + t.id + "Risk").val(t.obj.risk);
-				$("#" + t.id + "Risk").trigger("chosen:updated");
-				
-				$("#" + t.id + "Solution").val(t.obj.solution);
-				$("#" + t.id + "Solution").trigger("chosen:updated");
-				
-				$("#" + t.id + t.obj.box).removeClass( "eeChooserBoxUnSelect" );
-				$("#" + t.id + t.obj.box).addClass( "eeChooserBox" );
-				
-				// setup sounds      
-				var audio1 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/1.mp3");
-				var audio2 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/2.mp3");
-				var audio3 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/3.mp3");
-				
-				var audio4 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/4.mp3");
-				var audio5 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/5.mp3");
-				var audio6 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/6.mp3");
-				var audio7 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/7.mp3");
-				
-				var audio8 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/8.mp3");
-				var audio9 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/9.mp3");
-				var audio10 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/10.mp3");
-				var audio11 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/11.mp3");
-				var audio12 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/12.mp3");
-				var audio13 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/13.mp3");
-				
-				t.audios = new Array(audio1,audio2,audio3,audio4,audio5,audio6,audio7,audio8,audio9,audio10,audio11,audio12,audio13);
-				
-				t.audios[0].addEventListener("ended", function() {t.audios[1].play()});
-				t.audios[1].addEventListener("ended", function() {t.audios[2].play()});
-				t.audios[2].addEventListener("ended", function() {t.clicks.resetAudios(t)});
-				
-				t.audios[4].addEventListener("ended", function() {t.audios[3].play()});
-				t.audios[3].addEventListener("ended", function() {t.audios[5].play()});
-				t.audios[5].addEventListener("ended", function() {t.audios[6].play()});
-				t.audios[6].addEventListener("ended", function() {t.clicks.resetAudios(t)});
-				
-				t.audios[10].addEventListener("ended", function() {t.audios[11].play()});
-				t.audios[11].addEventListener("ended", function() {t.audios[12].play()});
-				t.audios[12].addEventListener("ended", function() {t.clicks.resetAudios(t)});
-				
-				t.audios[8].addEventListener("ended", function() {t.audios[9].play()});
-				t.audios[9].addEventListener("ended", function() {t.clicks.resetAudios(t)});
-				
-				var resetAudios = function() {
-					$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
-				}
-				
-				//Infographic Popup
-				$("#" + t.id + "viewInfoGraphic").on('click',function(c){
-					TINY.box.show({
-						animate: true, url: 'plugins/ecological-effects-slc/html/info-graphic.html',
-						fixed: true, width: 660, height: 570
-					});		
-				})
-				// Sound section clicks
-				$('.eeslr-volume').on('click',function(c){
-					var tid = c.target.id.replace(t.id,"");
-					//console.log($(c.target.id));
-					if (tid == "sound1") {if (t.audios[0].duration > 0 && !t.audios[0].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[0].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
-					if (tid == "sound2") {if (t.audios[0].duration > 0 && !t.audios[4].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[4].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
-					if (tid == "sound3") {if (t.audios[0].duration > 0 && !t.audios[10].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[10].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
-					if (tid == "sound4") {if (t.audios[0].duration > 0 && !t.audios[8].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[8].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}};
-					t.lastAudio = tid;
-				});
-				// Infographic section clicks
-				$('.eeslr-infobuttonhandle').on('click',function(c){
-					t.infoid = c.target.id.split("-").pop();
-					$("#" + t.id + "dfe4").trigger('click');
-				});
-				// tab button listener
-				$( "#" + t.id + "tabBtns input").on('click',function(c){
-					t.obj.active = c.target.value;
-					$.each($("#" + t.id + " .eeslr-sections"),function(i,v){
-						if (v.id != t.id + t.obj.active){
-							$("#"+ v.id).slideUp();
-						} else {
-						   $("#" + t.id + t.obj.active).slideDown(400)
-						}
-					});
-					if (t.obj.active == "showInfo"){
-						$("#" + t.id + t.obj.active).slideDown(400, function(){
-							if (t.infoid.length != 0){
-								document.getElementById(t.id + t.infoid).scrollIntoView(false)
-								$("." + t.infoid).animate({backgroundColor:"#f3f315"}, 1250, function(){
-									$("." + t.infoid).animate({backgroundColor:"#ffffff"}, 1250, function(){
-										t.infoid = "";
-									});
-								});
-							}
-						});						
-					}else{
-						//if (t.obj.crsSelected.length > 0){
-						//	t.clicks[t.obj.active](t);
-						//}
+	return declare(null, { 
+		appSetup: function(t){
+			t.url = "http://dev.services.coastalresilience.org/arcgis/rest/services/Hawaii/EESLR/MapServer"
+			t.dynamicLayer = new ArcGISDynamicMapServiceLayer(t.url);
+			t.map.addLayer(t.dynamicLayer);
+			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
+			t.dynamicLayer.on("load", function () {
+				t.layersArray = t.dynamicLayer.layerInfos;
+				$("#" + t.id + t.obj.flooding).prop('checked',true);
+				$("#" + t.id + t.obj.year).prop('checked',true);
+				$("#" + t.id + t.obj.pools).prop('checked',true);
+				// create and add flood layer
+				t.floodLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
+				t.map.addLayer(t.floodLayer);
+				t.floodLayer.setVisibleLayers(t.obj.floodLayers);
+				// create and add ref layers
+				t.refLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
+				t.map.addLayer(t.refLayer);
+				t.refLayer.setVisibleLayers(t.obj.refLayers);
+				t.refLayer.on("update",function() {
+					if ( t.obj.refLayers.length == 0 ){
+						setTimeout(function () { $("#legend-container-0").hide() }, 250);
 					}
 				})
-				// slider and pill clicks
-				$( '.toggle-btn input' ).click(function(c){
-					t.obj[c.target.name] = c.target.value;
-					t.clicks.updateTodas(t);
-				});
-				
-				$('.eechooser').on('change', function(c, params) {
-					var tid = c.target.id.replace(t.id,"").toLowerCase();
-					t.obj[tid] = c.target.value;
-					t.clicks.updateTodas(t);
-				 });
-				
-				$('.eeChoosers').click(function(c){
-					if ( c.target.id == "") {activeBox = ($(c.target).parent().parent().parent().parent()[0].id)} else {
-						var activeBox = c.target.id;
+				// Save and Share Handler					
+				if (t.obj.stateSet == "yes"){
+					$("#" + t.id + "topSelect").val(t.obj.topVal).trigger("chosen:updated").change();
+					if ( t.obj.floodLayersOn == "yes" ){
+						$("#" + t.id + "flooding-cb").trigger("click");
 					}
-				
-					var tid = activeBox.replace(t.id,"");
-					
-					if (tid != "") {
-					
-						t.obj.box = tid;
+					//extent
+					var extent = new Extent(t.obj.extent.xmin, t.obj.extent.ymin, t.obj.extent.xmax, t.obj.extent.ymax, new SpatialReference({ wkid:4326 }))
+					t.map.setExtent(extent, true);
 						
-						if (tid == "RiskBox") {
-							var inactiveBox = activeBox.replace("Risk","Solution");
-						} else {
-							var inactiveBox = activeBox.replace("Solution","Risk");
+					t.obj.stateSet = "no";
+				}else{
+					$("#show-single-plugin-mode-help").trigger("click")
+				}	
+			});	
+			// hide legend if reference layers are not on
+			t.dynamicLayer.on("update",function() {
+				if (t.obj.refLayers.length == 0){
+					setTimeout(function () { $("#legend-container-0").hide() }, 250);
+				}
+			})
+			
+		},
+		eventListeners: function(t){
+			// top chosen menu
+			$("#" + t.id + "topSelect").chosen({disable_search: true, allow_single_deselect:false, width:"90%"})
+				.change(function(c){
+					var v = c.target.value;
+					$(".vs-wrap").slideDown();
+					t.clicks.getValues(t);
+					t.map.on("extent-change",function(){
+						t.clicks.getValues(t);
+						var scale = t.map.getScale();
+						if ( scale < 17000 ){
+							$("#" + t.exPoolID).show();
+						}else{
+							$("#" + t.exPoolID).hide();
 						}
-						
-						$("#" + activeBox).animate({backgroundColor:"#0096d6",color:"#fff"}, 400, function(){
-							$( "#" + activeBox ).removeClass( "eeChooserBoxUnSelect" );
-							$( "#" + activeBox ).addClass( "eeChooserBox" );							
-						});
+					})
+				});
+			
+			// Bar chart
+			// symbolize x-axis
+			var l = $('.vertAndLines').find('.dashedLines');  
+			$.each(l, function(i,v){
+				if (i == l.length - 1){
+					$(v).css({'opacity': '1', 'border-top': '2px solid #3d3d3d'})
+				}
+			})
+			// calculate width of bars
+			var bars = $('.barHolder').find('.sumBarsWrap');
+			var lw = $('.dashedLines').css('width').slice(0,-2)
+			var sLw = lw/bars.length;
+			var bWw = sLw - 4;
+			$('.smallLabels').css('width', sLw + 'px')
+			$('.sumBarsWrap').css('width', bWw + 'px')
+			$('.sumBars').css('width', bWw-20 + 'px')	
+			
+			// info clicks	
+			$(".h3InfoIcon").click(function(c){
+				$(c.currentTarget).hide();
+				$(c.currentTarget).parent().find(".hideH3InfoIcon").css("display","inline-block")
+				$(c.currentTarget).parent().next().slideDown();
+			});	
+			$(".hideH3InfoIcon").click(function(c){
+				$(c.currentTarget).hide();
+				$(c.currentTarget).parent().find(".h3InfoIcon").css("display","inline-block")
+				$(c.currentTarget).parent().next().slideUp();
+			});				
 
-						$("#" + inactiveBox).animate({backgroundColor:"#ccc",color:"#888"}, 400, function(){
-							$( "#" + inactiveBox ).removeClass( "eeChooserBox" );
-							$( "#" + inactiveBox ).addClass( "eeChooserBoxUnSelect" );	
-						});					
-				
-						t.clicks.updateTodas(t);
+			// Toggle button clicks
+			$(".vs-wrap .toggle-btn input").click(function(c){
+				t.clicks.getValues(t);
+			})
+
+			// Show Flooding Layer Checkbox
+			$("#" + t.id + "flooding-cb").click(function(c){
+				if ( c.currentTarget.checked ){
+					$("#" + t.id + "flooding-wrap").slideDown();
+					$("#" + t.id + "legend-wrap").show();
+					$("#" + t.id + "controls-both").css("display","inline");
+					t.obj.floodLayersOn = "yes";
+					t.clicks.getValues(t);
+				}else{
+					$("#" + t.id + "flooding-wrap").slideUp();
+					$("#" + t.id + "legend-wrap").hide();
+					$("#" + t.id + "controls-both").hide();
+					t.obj.floodLayersOn = "no";
+					t.obj.floodLayers = [-1];
+					t.floodLayer.setVisibleLayers(t.obj.floodLayers);
+				}
+			})
+
+			// summary and methods buttons
+			$("#" + t.id + "summary").click(function(){
+				window.open("http://media.coastalresilience.org/HI/EESLC_Summary.pdf")
+			})
+			$("#" + t.id + "methods").click(function(){
+				window.open("http://media.coastalresilience.org/HI/EESLC_Methods.pdf")
+			})	
+
+			// Set up audio portion
+			t.clicks.startAudio(t);
+
+			// show/hide reference layers
+			$("#" + t.id + "reference-cb").click(function(c){
+				if ( c.currentTarget.checked ){
+					$("#" + t.id + "reference-wrap").slideDown();
+				}else{
+					$("#" + t.id + "reference-wrap").slideUp();
+					$("#" + t.id + "reference-wrap input").each(function(i,v){
+						if ( $("#" + v.id).is(":checked") ){
+							$("#" + v.id).trigger("click")
+						}
+					})
+				}
+			})
+			$("#" + t.id + "reference-wrap input").click(function(c){
+				var lid = -1;
+				$.each(t.layersArray,function(i,v){
+					if ( v.name == c.currentTarget.value){
+						lid = v.id;
 					}
-
-				});
-				
-				//Create a custom area but clicking button
-				$('#' + t.id + 'customAreaButton').on('click', function(c, params) {
-
-					$('#' + t.id + 'customAreaButton').hide();
-					$('#' + t.id + 'clearcustomAreaButton').show();
-					t.agsDrawPolygon.deactivate();
-					t.agsDrawPolygon.activate();
-					
-				 });
-				
-				//clear the custom area				
-				$('#' + t.id + 'clearcustomAreaButton').on('click', function(c, params) {
-				
-					t.obj.clip = ""
-					
-					t.agsDrawPolygon.deactivate();
-					t.agsDrawPolygon.reset();
-					
-					//t.chartData = dojo.clone(this.chartDataOrg);
-					//this.updateDisplay();
-				
-					$('#' + t.id + 'customAreaButton').show();
-					$('#' + t.id + 'clearcustomAreaButton').hide();
-					
-					t.clicks.updateTodas(t);
-					
-				 });
-				
-				//select the proper tab on startup
-				$("#" + t.id + t.obj.active).trigger('click');
-			
-				//scale
-				$('#' + t.id + 'caveat').hide();
-				t.map.on("zoom-end", function() {if (t.map.getScale() < 10000) {
-					
-						$('#' + t.id + 'caveat').show();
-			
-					} else {
-						
-						$('#' + t.id + 'caveat').hide();};
-						
-					if(t.open == "yes") {t.clicks.updateTodas(t)}});
-
-				
-				
-				$("#" + t.id + "showFlood").change(function() {
-					if(this.checked) {
-						t.obj.showFlood = true;
-					} else {
-						t.obj.showFlood = false;
+				})
+				if ( c.currentTarget.checked ){
+					t.obj.refLayers.push(lid)
+				}else{
+					var index = t.obj.refLayers.indexOf(lid)
+					if ( index > -1 ){
+						t.obj.refLayers.splice(index,1)
 					}
-					t.clicks.updateTodas(t);
-				});
-				
-	
-				$("#" + t.id + "transSlider").slider({ min: 0, max: 100, value: t.obj.trans,  change: function(e, ui) {t.obj.trans = ui.value; t.clicks.doTrans(t);}})
-			
-				$("#" + t.id + "methods").on('click', function(c, params) {
-					window.open('http://media.coastalresilience.org/HI/EESLC_Methods.pdf','_newtab');
-				});
-
-				$("#" + t.id + "dsummary").on('click', function(c, params) {
-					window.open('http://media.coastalresilience.org/HI/EESLC_Summary.pdf','_newtab');
-				});				
-				
-				
-			},
-
-			doTrans: function(t) {
-				
-				if (t.floodLayer != undefined) {t.floodLayer.setOpacity(t.obj.trans / 100.0)};					
-				
-			},
-			
-			resetAudios: function(t) {
-				$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
-				$('.volumneicons').removeClass("fa-volume-up").addClass("fa-volume-off");
-			},
-			
-			updateTodas: function(t) {
-
-				console.log(t.obj);
-				console.log(t.combos.url);
-
-				if (t.featureLayerPoints != undefined) {t.map.removeLayer(t.featureLayerPoints)};
-				if (t.featureLayerPolygons != undefined) {t.map.removeLayer(t.featureLayerPolygons)};
-				
-				var fname = t.obj[t.obj.box.replace("Box","").toLowerCase()] ;
-				console.log(fname);
-				
-				var featuresCombo = t.obj.year + "|" + fname;
-				//var featureNumbers = t.combos[featuresCombo];
-				var featureNumbers = t.combos[featuresCombo].concat([509]);
-
-				var query = new Query();
-				if (t.obj.pools == "All") {
-					query.where = "EXISTING > -1"
-				} else if (t.obj.pools == "Existing") {
-					query.where = "EXISTING = 1"
-				} else {
-					query.where = "EXISTING = 0"
 				}
-
-				if (t.obj.clip != "") {
-					query.geometry = t.obj.clip;
-				}
-				
-				/*
-				var infoTemplate = new esri.InfoTemplate("${FINAL}", "${FINAL}");
-				t.featureLayerPoints = new FeatureLayer(t.combos.url + "//" + featureNumbers[0], {
-						infoTemplate: infoTemplate,
-						mode: FeatureLayer.MODE_SELECTION,
-						outFields: ["*"]
-					});
-				
-				t.featureLayerPoints.setDefinitionExpression(equery.where);
-				t.map.addLayer(t.featureLayerPoints);
-				
-				t.featureLayerPoints.selectFeatures(equery, FeatureLayer.SELECTION_NEW, function(e) {t.clicks.updateChart(e,t,fname);});
-				
-				var infoTemplate = new esri.InfoTemplate("${FINAL}", "${FINAL}");
-				t.featureLayerPolygons = new FeatureLayer(t.combos.url + "//" + featureNumbers[1], {
-						infoTemplate: infoTemplate,
-						mode: FeatureLayer.MODE_SELECTION,
-						outFields: ["*"]
-					});
-				
-				t.featureLayerPolygons.setDefinitionExpression(equery.where);
-				t.map.addLayer(t.featureLayerPolygons);
-				
-				t.featureLayerPolygons.selectFeatures(equery, FeatureLayer.SELECTION_NEW, function(e) {});
-				*/
-
-				if (t.poolsLayer == undefined) {
-					t.poolsLayer = new ArcGISDynamicMapServiceLayer(t.combos.url,{
-						useMapImage: true
-						}
-					  );
-				  t.poolsLayer.setVisibleLayers(featureNumbers)
-				  t.map.addLayer(t.poolsLayer);	
-				}
-				
-				t.poolsLayer.setVisibleLayers(featureNumbers)
-				
-				if (t.obj.year == "Recent") {var oidf = "OBJECTID"} else {var oidf = "OBJECTID_1"}				
-				var queryTask = new QueryTask(t.combos.url + "//" + featureNumbers[0]);
-				//var query = new Query();
-				query.outFields = [oidf + "," + fname];
-				query.returnGeometry = false;
-				queryTask.on("complete", function(d) {t.clicks.updateChart(d,t,fname, query.where, featureNumbers)});
-				//queryTask.on("error", queryTaskErrorHandler);
-				queryTask.execute(query);				
-
-
-				if (t.floodLayer == undefined) {
-					t.floodLayer = new ArcGISDynamicMapServiceLayer(t.combos.url,{
-						useMapImage: true
-						}
-					  );
-				t.floodLayer.setVisibleLayers([-1])
-				t.map.addLayer(t.floodLayer);	
-				}
-
-				if (t.obj.showFlood == true) {
-					var layersCombo = t.obj.year + "|" + t.obj.flooding;
-					var layerNumbers = t.combos[layersCombo];
-					
-					t.floodLayer.setVisibleLayers(layerNumbers)
-					t.floodLayer.show()
-					t.legendContainer.innerHTML = "Likelihood of flooding<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(51, 77, 92);stroke-width:3;stroke:rgb(51, 77, 92)' /></svg> Higher<br><svg width='25' height='17'><rect width='25' height='17' style='fill:rgb(69, 178, 157);stroke-width:3;stroke:rgb(69, 178, 157)' /></svg> Lower"
-				} else {
-					t.floodLayer.hide()
-					t.legendContainer.innerHTML = ''
-			
-				}
-
-				if (t.map.getScale() < 10000) {
-					
-					t.legendContainer.innerHTML = t.legendContainer.innerHTML + '<div class="item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAALRJREFUOI2t1MENwyAMBVAfkP4MWYHMk64TMg/7ZIXM8G+9ACKEtjbUJwToyQbpO/lzubwAEGYgkqGAAALJXUQigNOAeBHZkiEkg6vOo4i8SKqwZVnW67r2dr8e+RzAtjRRfIDaajGSa/3+JrCHtXfUoAZTg1pMBVqwn6AV+wqOYB/BUawLzmAPcBa7gST9LNZ2mFPDjJH0OaV6nxIt2VhF2FFAkgGApalSqbPjFrAZHRKbegPtOZZIYUnfigAAAABJRU5ErkJggg==" width="20" height="20" title="" alt=""><span class="item-label">Data Removed by Landowner Request</span></div>'
-			
-					} 
-
-			
-				t.clicks.doTrans(t);
-				
-			},
-	
-			modifyFilter: function(geo, t) {
-			   
-				t.obj.clip = geo.shape;
-				t.clicks.updateTodas(t);			
-
-			},
-			
-			
-			queryTaskExecuteCompleteHandler: function(data) {
-				console.log(data);
-			},
-			
-			
-			
-			updateChart: function(d, t, cField, owhere, featureNumbers) {
-				if (t.obj.year == "Recent") {var oidf = "OBJECTID"} else {var oidf = "OBJECTID_1"}
-				var indata = d.featureSet.features
-				console.log(indata)
-				$('#' + t.id + 'd3Area').empty();
-				
-				//alert(cField);
-				console.log(indata.length);
-				
-				//LMH = {"Low":0,"Medium":0,"High":0} 
-				
-				if (t.obj.box == "RiskBox") {
-					var LMH = [{letter: "Low", frequency: 0, color:"yellow"},{letter: "Medium", frequency: 0, color: "orange"},{letter: "High", frequency: 0, color:"red"},{letter: "Unknown", frequency: 0, color:"#999"}]
-				} else {
-					var LMH = [{letter: "Low", frequency: 0, color:"yellow"},{letter: "Medium", frequency: 0, color: "#b8ca7a"},{letter: "High", frequency: 0, color:"#667e53"},{letter: "Unknown", frequency: 0, color:"#999"}]
-				}
-				
-				var dataN = indata.length
-				var other = 0;
-				
-				var allids = new Array()
-				array.forEach(indata, function(feat, f){
-					allids.push(feat.attributes[oidf])
-					var fValue = feat.attributes[cField];
-					if (cField == "FINAL") {
-						if (fValue <= 20) {
-							console.log("Low");
-							LMH[0].frequency = LMH[0].frequency + 1;
-						} else if (fValue <= 60) {
-							console.log("Medium");
-							LMH[1].frequency = LMH[1].frequency + 1;
-						} else {
-							console.log("High");
-							LMH[2].frequency = LMH[2].frequency + 1;
-						}
-					} else {
-						if (fValue == 0) {
-							console.log("Low");
-							LMH[0].frequency = LMH[0].frequency + 1;
-						} else if (fValue == 20) {
-							console.log("Medium");
-							LMH[1].frequency = LMH[1].frequency + 1;
-						} else if (fValue == 40) {
-							console.log("High");
-							LMH[2].frequency = LMH[2].frequency + 1;
-						} else {
-							LMH[3].frequency = LMH[3].frequency + 1;
-							other = other + 1;
-						}
+				t.refLayer.setVisibleLayers(t.obj.refLayers);
+			})
+		},
+		getValues: function(t){
+			// get chosen menu value
+			t.obj.topVal = $("#" + t.id + "topSelect").chosen().val()
+			// find selected radio in each toggle button group - the array is of class names of each tb wrapper div
+			var tb = ["flooding", "year", "pools"]
+			$.each(tb,function(x,y){
+				$(".vs-wrap ." + y + " input").each(function(i,v){
+					$(v).prop("disabled", false);
+					if ( $(v).is(':checked') ) {
+						t.obj[y] = v.value;
 					}
-				});
-				
-				//console.log(allids);
-				var layerDefinitions = [];
-				
-				if (t.obj.pools == "All") {
-					var polyQ = "EXISTING = 0"
-				} else if (t.obj.pools == "Existing") {
-					var polyQ = "EXISTING < 0"
-				} else {
-					var polyQ = "EXISTING = 0"
-				}
-					
-				if (t.obj.clip == "") {
-
-					layerDefinitions[featureNumbers[0]] = owhere;
-					layerDefinitions[featureNumbers[1]] = polyQ;
-					t.poolsLayer.setLayerDefinitions(layerDefinitions);
-				
-				} else {
-					
-					var allid = allids.join(" OR " + oidf + " = ");
-					if (allids.length == 0) {allid = "-1"}
-					var outq = "(" + owhere + ") AND (" + oidf + " = " + allid + ")"
-					var PolyQoutq = "(" + polyQ + ") AND (" + oidf + " = " + allid + ")"
-					//console.log(outq);
-					layerDefinitions[featureNumbers[0]] = outq;
-					layerDefinitions[featureNumbers[1]] = PolyQoutq;
-					t.poolsLayer.setLayerDefinitions(layerDefinitions);					
-				}
-				
-				t.poolsLayer.setVisibleLayers(featureNumbers);
-		
-				$('#' + t.id + 'd3Title').hide();
-				
-				var h = $('#' + t.id + 'd3Area').height();
-				var w = $('#' + t.id + 'd3Area').width();
-				console.log(w,h);
-
-				$('#' + t.id + 'd3Area').empty();
-
-				var margin = {top: 20, right: 20, bottom: 50, left: 50}
-				
-				t.chart = d3.select('#' + t.id + 'd3Area').append("svg")
-					
-					t.chart.style("width", w)
-					t.chart.style("height", h);
-					
-					var width = w - margin.left - margin.right,
-					height = h - margin.top - margin.bottom;
-
-				var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-					y = d3.scaleLinear().rangeRound([height, 0]);
-
-				var g = t.chart.append("g")
-					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-				  var data = LMH;
-
-				  console.log(data);
-				  x.domain(data.map(function(d) { return d.letter; }));
-				  y.domain([0, dataN]);
-
-				  g.append("g")
-					  .attr("class", "axis axis--x")
-					  .attr("transform", "translate(0," + height + ")")
-					  .call(d3.axisBottom(x));
-
-				  t.chart.select(".y.axis").remove();
-
-				  g.append("g")
-					  .attr("class", "axis axis--y")
-					  .call(d3.axisLeft(y).ticks(10))
-					.append("text")
-					  .attr("transform", "rotate(-90)")
-					  .attr("y", 6)
-					  .attr("dy", "0.71em")
-					  .attr("text-anchor", "end")
-					  .text("Frequency");
-
-				  g.selectAll(".bar")
-					.data(data)
-					.enter().append("rect")
-					  .attr("class", "bar")
-					  .attr("fill", function(d) {
-						return d.color;
-					  })
-					  .attr("x", function(d) { return x(d.letter); })
-					  .attr("y", function(d) { return y(d.frequency); })
-					  .attr("width", x.bandwidth())
-					  .attr("height", function(d) { return height - y(d.frequency); });
-					  
-				  g.selectAll("text.bar")
-					  .data(data)
-					  .enter().append("text")
-					  .attr("class", "bar")
-					  .attr("text-anchor", "middle")
-					  .attr("x", function(d) { return x(d.letter) + 48; })
-					  .attr("y", function(d) { return y(d.frequency) - 10; })
-					  .text(function(d) { return d.frequency; });
-
-				  g.append("text")
-					.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-					.attr("transform", "translate("+ (width/2) +","+(height-10+(margin.bottom))+")")  // centre below axis
-					.text(t.obj.box.replace("Box", "") + " Potential");
-
-				  g.append("text")
-					.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-					.attr("transform", "translate("+ (15 - margin.left) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
-					.text("Number of Pools");
-/*
-				if (other > 0) {
-					  g.append("text")
-						.attr("text-anchor", "left")  // this makes it easy to centre the text as the transform is applied to the anchor
-						.attr("transform", "translate("+ (35) +","+(height-10+(margin.bottom))+")")  // centre below axis
-						.text(other + " Pools with Unknown Value");	
-
-					  g.append("svg:rect").
-						attr("fill", "#ddd").
-						attr("x", 0).
-						attr("y", (height-22+(margin.bottom))).
-						attr("height", 15).
-						attr("width", 25);	
-				}
-*/					
-			},
-			
-			showInfo: function(t){
-				
-			},
-			
-			numberWithCommas: function(x){
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				})
+			})
+			if (t.obj.pools == "Future"){
+				$("#" + t.id + "Recent").prop("disabled", true);
 			}
-        });
-    }
-);
+			if (t.obj.year == "Current"){
+				$("#" + t.id + "Future").prop("disabled", true);
+			}
+			// use value to determine which pool and flood layers to show
+			t.obj.visibleLayers = [];
+			t.obj.floodLayers = [];
+			var lyrNm = "_" + t.obj.year + "_" + t.obj.topVal;
+			var fldNm = "_" + t.obj.year + "_" + t.obj.flooding;
+			$.each(t.layersArray,function(i,v){
+				if ( v.name.startsWith(lyrNm) ){
+					t.obj.visibleLayers.push(v.id)
+				}
+				if ( v.name.startsWith(fldNm) ){
+					t.obj.floodLayers.push(v.id)
+				}
+			})
+			$.each(t.layersArray,function(i,v){
+				if ( v.name == "Data Removed by Landowner Request"){
+					t.obj.visibleLayers.push(v.id)
+				}
+			})
+			// set where clause for layer definition and query for graph
+			var w = "EXISTING > -1";
+			if ( t.obj.pools == "Existing" ){
+				w = "EXISTING = 1";
+			}
+			if ( t.obj.pools == "Future" ){
+				w = "EXISTING = 0"
+			}
+			t.layerDefs = [];
+			t.layerDefs[t.obj.visibleLayers[0]] = w;
+			t.layerDefs[t.obj.visibleLayers[1]] = w;
+			t.dynamicLayer.setLayerDefinitions(t.layerDefs);
+			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
+			if (t.obj.floodLayersOn == "no"){
+				t.obj.floodLayers = [-1];
+			}
+			t.floodLayer.setVisibleLayers(t.obj.floodLayers);
+			// run query to update graph
+			var q = new Query();
+			var qt = new QueryTask(t.url + "/" + t.obj.visibleLayers[0]);
+			q.where = w;
+			q.geometry = t.map.extent;
+			q.returnGeometry = false;
+			q.outFields = ["*"];
+			// field name and bar graph colors if Restore or Protect is selected
+			var field = t.obj.topVal
+			var colors = ['#fff74c','#b7ca79','#677e52','#b2b2b2']
+			$("#" + t.id + "xLabel").html("Solution Potential")
+			// field name and bar graph colors if Risk Variables are selected
+			if (t.obj.topVal.indexOf("_") > -1){
+				field = t.obj.topVal.split(/_(.+)/)[1]
+				colors = ['#fff74c','#ed9a50','#e74949','#b2b2b2']
+				$("#" + t.id + "xLabel").html("Risk Potential")
+			} 
+			qt.execute(q, function(e){
+				// get graph values
+				var low = 0;
+				var med = 0;
+				var hig = 0;
+				var und = 0;
+				$.each(e.features, function(i,v){
+					if ( v.attributes[field] == 0 ){
+						low = low + 1;
+					}
+					if ( v.attributes[field] == 20 ){
+						med = med + 1;
+					}
+					if ( v.attributes[field] == 40 ){
+						hig = hig + 1;
+					}
+					if ( v.attributes[field] == 255 ){
+						und = und + 1;
+					}
+				})
+				var a = [low, med, hig, und]
+				// update bar graph
+				$('.barHolder').find('.sumBars').each(function(i,v){
+					$(v).css("background-color", colors[i]);
+					var h = Math.round(a[i]/1200*100)
+					$(v).animate({ height: h + '%'});
+					$(v).find(".barLabel").html( t.clicks.numberWithCommas(a[i]) )
+				});	
+			});
+		},
+		startAudio: function(t){
+			// setup sounds      
+			var audio1 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/1.mp3");
+			var audio2 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/2.mp3");
+			var audio3 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/3.mp3");
+			
+			var audio4 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/4.mp3");
+			var audio5 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/5.mp3");
+			var audio6 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/6.mp3");
+			var audio7 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/7.mp3");
+			
+			var audio8 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/8.mp3");
+			var audio9 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/9.mp3");
+			var audio10 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/10.mp3");
+			var audio11 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/11.mp3");
+			var audio12 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/12.mp3");
+			var audio13 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/13.mp3");
+			
+			t.audios = new Array(audio1,audio2,audio3,audio4,audio5,audio6,audio7,audio8,audio9,audio10,audio11,audio12,audio13);
+			
+			t.audios[0].addEventListener("ended", function() {t.audios[1].play()});
+			t.audios[1].addEventListener("ended", function() {t.audios[2].play()});
+			t.audios[2].addEventListener("ended", function() {t.clicks.resetAudios(t)});
+			
+			t.audios[4].addEventListener("ended", function() {t.audios[3].play(); console.log("ended 4")});
+			t.audios[3].addEventListener("ended", function() {t.audios[5].play(); console.log("ended 3")});
+			t.audios[5].addEventListener("ended", function() {t.audios[6].play(); console.log("ended 5")});
+			t.audios[6].addEventListener("ended", function() {t.audios[10].play(); console.log("ended 6")});
+			
+			t.audios[10].addEventListener("ended", function() {t.audios[11].play(); console.log("ended 10")});
+			t.audios[11].addEventListener("ended", function() {t.audios[12].play(); console.log("ended 11")});
+			t.audios[12].addEventListener("ended", function() {t.clicks.resetAudios(t); console.log("ended 12")});
+			
+			t.audios[8].addEventListener("ended", function() {t.audios[9].play()});
+			t.audios[9].addEventListener("ended", function() {t.clicks.resetAudios(t)});
+			
+			var resetAudios = function() {
+				$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
+			}
+			// Sound section clicks
+			$('.eeslr-volume').on('click',function(c){
+				var tid = c.target.id.replace(t.id,"");
+				//console.log($(c.target.id));
+				if (tid == "sound1") {if (t.audios[0].duration > 0 && !t.audios[0].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[0].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}}
+				if (tid == "sound2") { if (t.audios[0].duration > 0 && !t.audios[4].paused) { t.clicks.resetAudios(t) }else { t.clicks.resetAudios(t); t.audios[4].play(); $(c.target).removeClass("fa-volume-off"); $(c.target).addClass("fa-volume-up");}}
+				if (tid == "sound4") {if (t.audios[0].duration > 0 && !t.audios[8].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[8].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}}
+				t.lastAudio = tid;
+			});
+		},
+		resetAudios: function(t) {
+			$.each(t.audios, function(i,v) {var temps = v.src;v.pause();v.currentTime = 0; v.src = "temp";v.src = temps });
+			$('.volumneicons').removeClass("fa-volume-up").addClass("fa-volume-off");
+		},
+		numberWithCommas: function(x){
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+    });
+});

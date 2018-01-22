@@ -1,6 +1,116 @@
-.infoIcon{
-	cursor:pointer; position:absolute; right:3px; bottom:3px;
+select {
+    width: 92px;
+    white-space:pre-wrap;
 }
+.top-select .chosen-container-single span{
+	font-size:14px;
+}
+.top-select .chosen-container .chosen-results li.group-result{
+	font-size:14px; color:#2F6384; background:#E3E7EA;
+}
+.tog-btn-pad .toggle-btn label{
+	padding:5px 4px;
+}
+.h3InfoIcon {
+    margin-bottom:-4px; margin-left:3px; cursor:pointer;
+}
+.hideH3InfoIcon {
+    margin-bottom:-4px; margin-left:3px; cursor:pointer; display:none;
+}
+.h3Info{
+	display:none; margin:0px 10px 10px 5px; line-height:15px; 
+}
+.vs-wrap{
+	display:none;
+}
+.vs-wrap input[type="radio"][disabled] + label {
+	text-decoration:line-through; background:#efefef; cursor:not-allowed;
+} 
+.vs-wrap h4{
+	margin-bottom:0.4rem;
+}
+.fld-cb-wrap label, .ref-cb-wrap label{
+	color:#101d28; font-size:14px;
+}
+.fld-cb-wrap{
+	margin-top:1.5rem; margin-bottom:-1rem;
+}
+.flooding-wrap{
+	display:none; position:relative;
+}
+.controls-both{
+	margin-left:5px; font-weight:normal; display:none;
+}
+.legend-flex-wrap{
+	display:flex; margin-top:-2px; box-shadow:0 1px 1px rgba(16,22,26,.2); border:1px solid #ddd; padding:2px 5px 2px 1px; margin-left:22px; width:140px;
+}
+.legend-wrap{
+	display:none;
+}	
+.legend-box{
+	height:15px; width:15px; margin-right:5px; margin-left:5px; margin-top:2px;
+}
+.box-wrap{
+	margin-top:20px; text-align:center; border-top:1px solid #ddd; padding-top:20px;
+}
+.ref-cb-wrap{
+	margin-top:1.5rem;
+}
+.reference-wrap{
+	padding-left:22px; display:none;
+}
+.reference-wrap p{
+	text-decoration:underline; margin-bottom:0.5rem;
+}
+
+/*bar graph stlyes*/
+.graph-header{
+	text-align:center; margin-top:1.5rem;
+}
+.barGraphWrap{
+	display:inline-block; position:relative; height:277px; margin-left:18px;
+}
+.vertandLines{
+	display:inline-block; position:relative; z-index:10;
+}
+.vertLbl{
+	text-align:right; width:30px; display:inline-block;
+}
+.dashedLines{
+	margin-left:5px; width:250px; border-top:1px dashed #777; opacity:0.3; vertical-align:middle; height:2px; display:inline-block;
+}
+.vLabelLineWrap{
+	display:block; height:19px; margin-bottom:7px; position:relative; z-index:10;
+}
+.barHolder{
+	position:absolute; height:210px; left:36px; bottom:61px;
+}
+.sumBarsWrap{
+	bottom:0; width:31px; display:inline-block;
+}
+.sumBars{
+	bottom:-3px; width:31px; -moz-box-shadow: inset 1px 2px 2px rgba(255, 255, 255, .4), inset -1px -1px 2px rgba(0, 0, 0, .4), 2px 1px 3px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: inset 1px 2px 2px rgba(255, 255, 255, .4), inset -1px -1px 2px rgba(0, 0, 0, .4), 2px 1px 3px rgba(0, 0, 0, .4);
+	box-shadow: inset 1px 2px 2px rgba(255, 255, 255, .4), inset -1px -1px 2px rgba(0, 0, 0, .4), 0 1px 1px rgba(16,22,26,.2); position:absolute; margin-left:10px;
+}
+.smallLabels{
+	position:absolute; bottom:-46px; height:44px; text-align:center; 
+	margin:-2px; padding-top:4px; line-height:1.2;
+}
+.lastLabel{
+	border-right:1px solid rgba(0, 0, 0, 0); padding-left:2px;
+}
+.xBarGraphLabel{
+	position:relative; top:11px; text-align:center; font-weight:bold;
+}
+.yBarGraphLabel{
+	position:relative; bottom:152px; left:-104px; text-align:center; transform:rotate(-90deg); width:190px; font-weight:bold;
+}	
+.barLabel{
+	text-align:center; position:relative; top:-20px; font-weight:bold; font-size:14px;
+}
+
+
 .flex1{
 	flex:1;
 }
@@ -36,9 +146,9 @@
 .emBar{
 	border-top:1px solid #424542; border-right:1px solid #424542;
 }
-.barLabel{
+/*.barLabel{
 	position:relative; z-index:2; left:1px; top:0px; color:#000;
-}
+}*/
 .bar3{
 	background: repeating-linear-gradient(45deg, #ecefde, #ecefde 5px, #ccc 5px, #ccc 10px);
 }
@@ -210,11 +320,8 @@ label.checkBoxLabels input[type=checkbox]{
 .tabBtns{
 	margin-right:-6px; margin-bottom:0 !important; background:#f3f3f3; border-bottom: 1px solid #cdd5d5 !important; border-top: 1px solid #cdd5d5 !important;
 }
-.eeslr-sections{
-	position:relative; top:50px;
-}
 .eeslr-sections > *{
-	padding-left:6px; padding-right:6px;
+	padding:6px;
 }
 .eeslr-fut-sections{
 	margin:10px -6px;
@@ -224,7 +331,7 @@ label.checkBoxLabels input[type=checkbox]{
 	padding-right:10px;
 }
 .eeslr-volume{
-	cursor: pointer; cursor: hand;
+	cursor:pointer; cursor:hand; margin-top:-5px; margin-left:5px;
 }
 .eeslr-infobuttonhandle{
 	cursor: pointer; cursor: hand;

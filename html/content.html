@@ -2,131 +2,209 @@
 Dijit ContentPane to hold all the elements. The ContentPane is assigned a dynamic id upon creation. The render function
 takes the ContentPane id and prepends it to every element with a declared id in this HTML before the elements are created.
 The unique ContentPane id makes all the element ids unique and prevents duplicate id errors across other apps.-->
-
-<div class="eeslr-app">
-	<div id="tab-wrap" class="">
-		<div id="tabBtns" class="toggle-btn tabBtns" style="width:500px;">
-			<input type="radio" id="dfe2" name="eeslr-dfe" value="showContent" />
-			<label for="dfe2">Anchialine Pools</label>
-			<input type="radio" id="dfe4" name="eeslr-dfe" value="showInfo"/>
-			<label for="dfe4">Info</label>
-		</div>
-	</div>	
+<h3>Select a Risk Variable or Solution<img src="plugins/ecological-effects-slc/images/infoBlue.png" alt="show Risk Variable and Solutions info" class="h3InfoIcon" style="margin-bottom:-2px;"><img src="plugins/ecological-effects-slc/images/infoCloseBlue.png" alt="hide choose scenario year info" class="hideH3InfoIcon" style="margin-bottom:-2px;"></h3>
+<div class="h3Info">
+	Cumulative risk scores represent a pools percent risk out of the total possible risk calculated by: ([Risk1] + [Risk2] + [Risk3] + [Risk4]/160)*100) This is the sum of the risk scores for each individual risk variable divided by the highest possible risk score, in this case 160 (4 variables with 40 as the highest value). "low" represents pools with scores &#60;20%, "medium" &#62;=20 - 60%, and "high" &#62; 60%. For more information on how each individual risk and solution variable was calculated, visit the <a href="http://coastalresilience.org/project/ecosystem-effects-of-sea-level-change/" target="_blank" alt="Coastal Resilience Apps page">Coastal Resilience Apps</a> page.
+	<div style="display:flex; margin-top:10px;"><div>Click to hear about risks and solutions</div><div class="eeslr-volume" style=""><i id="sound2" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></div></div>
 </div>	
-<div id="showContent" class="eeslr-sections">
-	<section>
-	<button id="dsummary" class="button button-primary">Download Summary</button>
-		<span class="eeslr-volume" style="position:absolute;top: 0px;left: 460px;"><i id="sound1" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>
-		<div style="width:100%">
-		 <div id="RiskBox" class="eeChoosers eeChooserBoxUnSelect">Select a Risk variable to view:
-				<div class="chosen-wrap">
-					<select id="Risk" class="chosen eechooser">
-							<option value="FINAL">Cumulative Risk Score</option>
-							<option value="INVASIVE">Likelihood of invasive species transmission</option>
-							<option value="FUT_DEV">Potential to be impacted by planned future development</option>
-							<option value="OCEAN">Likelihood of being inundated by ocean</option>
-							<option value="CESS">Likelihood of cess pool contamination</option>
-					</select>
-				</div>
-		 </div>
-		<span class="eeslr-volume" style="position: relative;top: -83px;left: 454px;"><i id="sound2" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>
+<div class="chosen-wrap top-select" style="margin:6px;">
+	<select data-placeholder="Click to Select" id="topSelect" class="chosen">
+		<option></option>
+		<optgroup label="Risk Variables">
+			<option value="RISK_SCORE">Cumulative Risk Score</option>
+			<option value="RISK_INVASIVE">Invasive species transmission</option>
+			<option value="RISK_FUT_DEV">Planned future development</option>
+			<option value="RISK_OCEAN">Inundated by ocean</option>
+			<option value="RISK_CESS">Cess pool contamination</option>
+		</optgroup>
+		<optgroup label="Solutions">
+			<option value="PROTECT">Land Protection Potential</option>
+			<option value="RESTORE">Invasive Fish Removal Priorities</option>
+		</optgroup>
+	</select>
+</div>
+<div class="vs-wrap">
+	<h4 class="graph-header">Pools in current map extent</h4>
+	<!-- bar graph -->
+	<div class="barGraphWrap">
+		<div class="vertAndLines">
+			<div class="vLabelLineWrap">
+				<div class="vertLbl" style="margin-right:5px; margin-left:-5px;">1,200</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl" style="margin-right:5px; margin-left:-5px;">1,050</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">900</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">750</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">600</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">450</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">300</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">150</div><div class="dashedLines"></div>
+			</div>
+			<div class="vLabelLineWrap">
+				<div class="vertLbl">0</div><div class="dashedLines"></div>
+			</div>
 		</div>
-		<div style="width:100%">
-		 <div id="SolutionBox" class="eeChoosers eeChooserBoxUnSelect" style="margin-top:-22px;margin-bottom:-22px">OR Select a Solution view:
-				<div class="chosen-wrap">
-					<select id="Solution" class="chosen eechooser">
-						<option value="PROTECT">Land Protection Potential</option>
-						<option value="RESTORE">Invasive Fish Removal Priorities</option>
-					</select>
-				</div>
-		 </div>
-		<span class="eeslr-volume" style="position: relative;top: -55px;left: 454px;"><i id="sound3" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>
-		</div>	
+		<div class="barHolder" id ="barHolder">
+			<div class="sumBarsWrap">
+				<div class="sumBars"><div class="barLabel"></div></div><div class="smallLabels">Low</div>
+			</div>
+			<div class="sumBarsWrap">
+				<div class="sumBars"><div class="barLabel"></div></div><div class="smallLabels">Medium</div>
+			</div>
+			<div class="sumBarsWrap">
+				<div class="sumBars"><div class="barLabel"></div></div><div class="smallLabels">High</div>
+			</div>
+			<div class="sumBarsWrap">
+				<div class="sumBars"><div class="barLabel"></div></div><div class="smallLabels">Unknown</div>
+			</div>
+		</div>
+		<div id="xLabel" class="xBarGraphLabel">Risk Potential</div>
+		<div class="yBarGraphLabel">Number of Pools</div>
+	</div>
 
-<table style="width:100%;margin-bottom:-35px">
-  <tr>
-    <td style="position: relative;top: -10px;">
-		<label class="form-component" for="showFlood">
-		<input type="checkbox" id="showFlood" name="food">
-		<div class="check"></div>
-		<span class="form-text">Show Flood Layers</span>
+	<div class="toggle-btn pools">
+		<input type="radio" id="All" name="pools" value="All"/>
+		<label for="All">All Pools</label>
+		<input type="radio" id="Existing" name="pools" value="Existing"/>
+		<label for="Existing">Existing Pools</label>
+		<input type="radio" id="Future" name="pools" value="Future"/>
+		<label for="Future">Future Pools</label>	
+	</div>
+	<h4>Choose Scenerio Year<img src="plugins/ecological-effects-slc/images/infoBlue.png" alt="show choose scenario year info" class="h3InfoIcon"><img src="plugins/ecological-effects-slc/images/infoCloseBlue.png" alt="hide choose scenario year info" class="hideH3InfoIcon"><span id="controls-both" class="controls-both">(Updates Graph <strong>and</strong> Flooding Layers)</span></h4>
+	<div class="h3Info">
+		Excluding the Recent scenario, each of the scenarios reflect an increase in regional sea level rise linked to projected global increases in mean sea level around the respective time period based on the Fifth Assessment Report of the Intergovernmental Panel on Climate Change (2013).
+	</div>	
+	<div class="toggle-btn year">
+		<input type="radio" id="Current" name="year" value="Current"/>
+		<label for="Current">Recent</label>
+		<input type="radio" id="2025" name="year" value="2025"/>
+		<label for="2025">2025</label>
+		<input type="radio" id="2035" name="year" value="2035"/>
+		<label for="2035">2035</label>
+		<input type="radio" id="2050" name="year" value="2050"/>
+		<label for="2050">2050</label>	
+		<input type="radio" id="2080" name="year" value="2080"/>
+		<label for="2080">2080</label>				
+	</div>
+	<div class="fld-cb-wrap">	
+		<label class="form-component" for="flooding-cb">
+			<input type="checkbox" id="flooding-cb" name="flooding-cb">
+			<div class="check"></div>
+			<span class="form-text">Show Likelihood of Flooding Layers</span>
 		</label>
-	</td>
-    <td style="float:right;margin:10px">Layer Opacity:</td>
-    <td>
-		<div class="slider-container" style="width:150px;">
-			<div id="transSlider" class="slider"></div>
-		</div>
-	</td> 
-  </tr>
-</table>
-
-		
-	<div class="eeslr-infobuttonhandle" id="-FloodingTypeInfo"><i class="fa fa-info-circle" aria-hidden="true" style="color:#0096d6"></i> Choose Type of Flooding</div>
-		<div class="toggle-btn" style="width:464px;">
-			<input type="radio" id="Frequent" name="flooding" value="Frequent"/>
-			<label for="Frequent">Frequent</label>
-			<input type="radio" id="Semi-Frequent" name="flooding" value="Semi-Frequent"/>
-			<label for="Semi-Frequent">Semi-Frequent</label>
-			<input type="radio" id="Infrequent" name="flooding" value="Infrequent"/>
-			<label for="Infrequent">Infrequent</label>
-			<input type="radio" id="Rarely" name="flooding" value="Rarely"/>
-			<label for="Rarely">Rarely</label>
-			<span class="eeslr-volume" style="width:20px;margin-left:-10px;position: relative;top: 0px;left: 10px;"><i id="sound4" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></span>			
-		</div>
-	<div class="eeslr-infobuttonhandle" id="-YearInfo"><i class="fa fa-info-circle" aria-hidden="true" style="color:#0096d6"></i> Choose Scenario Year</div>
-		<div class="toggle-btn" style="width:452px;">
-			<input type="radio" id="Recent" name="year" value="Recent"/>
-			<label for="Recent">Recent</label>
-			<input type="radio" id="2025" name="year" value="2025"/>
-			<label for="2025">2025</label>
-			<input type="radio" id="2035" name="year" value="2035"/>
-			<label for="2035">2035</label>
-			<input type="radio" id="2050" name="year" value="2050"/>
-			<label for="2050">2050</label>	
-			<input type="radio" id="2080" name="year" value="2080"/>
-			<label for="2080">2080</label>				
-		</div>
-		<div class="toggle-btn" style="width:452px;">
-			<input type="radio" id="All" name="pools" value="All"/>
-			<label for="All">All Pools</label>
-			<input type="radio" id="Existing" name="pools" value="Existing"/>
-			<label for="Existing">Existing Pools</label>
-			<input type="radio" id="Future" name="pools" value="Future"/>
-			<label for="Future">Future Pools</label>	
-		</div>
-		<div id="d3Title" class="d3Title" style="display: none;">Chart Loading...</div>
-		<div id="d3Area" class="d3Area" style="height: 400px;"></div>
-		<div id="caveat" style="width:140px;position:relative;top: -390px;left:320px;margin-bottom:-110px">Existing pools are not visible at this scale, please zoom out to view or contact <a href='mailto:cwiggins@tnc.org'>cwiggins@tnc.org</a> to request data access.</div>
-		<div style="width:100%; text-align: center;">Unless a custom area is drawn, scores are summarized for the entire study area and are not based on the zoom extent of your screen.</div>
-
-<table style="width:100%; text-align: center;">
-  <tr>
-    <td>
-		<button id="customAreaButton" class="button button-primary" style="">Draw Custom Area</button>
-		<button id="clearcustomAreaButton" class="button button-warning " style="display:none">Clear Custom Area</button>
-	</td> 
-    <td><button id="methods" class="button button-primary">Methods</button></td>
-  </tr>
-</table>
-	</section>
-</div>
-<div id="showInfo" class="eeslr-sections hide">
-	<section>
-		<h2>Documentation</h2>
-		<!-- <h3 class="infoDoc">Overview</h3>
-		<div class="explainWrap">
-			<button id="viewInfoGraphic" class="button button-default">View Overview Graphic</button> 
+		<div id="legend-wrap" class="legend-wrap">
+			<div class="legend-flex-wrap">
+				<div class="legend-box" style="background:rgb(76,178,157);"></div><div>Lower</div>
+				<div class="legend-box" style="background:rgb(49,77,90);"></div><div>Higher</div>
+			</div>	
 		</div>	
-	</section> 
-	<section>	-->
-		<div id="exwrap" class="explainWrap">
-			<h4 class="FloodingTypeInfo">Type of Flooding</h4>
-			<p id="FloodingTypeInfo" class="FloodingTypeInfo">Frequent flooding is expected to occur daily to every other day. Semi-frequent flooding is expected to occur on a weekly to monthly basis. Infrequent flooding might occur one to several times a year. Rare flooding are extreme events that occur once in multiple decades. 2016 US Army Corps LiDAR data were used to create the flood elevation extents.  Horizontal Positional Accuracy is compiled to meet 1 m at 95% confidence level and Vertical Positional Accuracy of 19.6 cm at a 95% confidence level (10 cm RMSE).</p>
-			<h4 class="YearInfo">Scenario Year</h4>
-			<p id="YearInfo" class="YearInfo">Excluding the Recent scenario, each of the scenarios reflect an increase in regional sea level rise linked to projected global increases in mean sea level around the respective time period based on the Fifth Assessment Report of the Intergovernmental Panel on Climate Change (2013).</p>	
-			<h4 class="RiskInfo">Risk Variables</h4>
-			<p id="RiskInfo" class="RiskInfo">Cumulative risk scores represent a pools percent risk out of the total possible risk calculated by: ([Risk1] + [Risk2] + [Risk3] + [Risk4]/160)*100) This is the sum of the risk scores for each individual risk variable divided by the highest possible risk score, in this case 160 (4 variables with 40 as the highest value). "low" represents pools with scores <20%, "medium" >=20 - 60%, and "high" > 60%. For more information on how each individual risk and solution variable was calculated, visit the <a href='http://coastalresilience.org/project/ecosystem-effects-of-sea-level-change/' target='_newtab'>Coastal Resilience Apps </a> page.</p>		
+	</div>
+	<div id="flooding-wrap" class="flooding-wrap">
+		<h4>Choose Type of Flooding<img src="plugins/ecological-effects-slc/images/infoBlue.png" alt="show choose type of flooding info" class="h3InfoIcon"><img src="plugins/ecological-effects-slc/images/infoCloseBlue.png" alt="hide choose type of flooding info" class="hideH3InfoIcon"></h4>
+
+		<div class="h3Info">
+			Frequent flooding is expected to occur daily to every other day. Semi-frequent flooding is expected to occur on a weekly to monthly basis. Infrequent flooding might occur one to several times a year. Rare flooding are extreme events that occur once in multiple decades. 2016 US Army Corps LiDAR data were used to create the flood elevation extents. Horizontal Positional Accuracy is compiled to meet 1 m at 95% confidence level and Vertical Positional Accuracy of 19.6 cm at a 95% confidence level (10 cm RMSE).
+		</div>	
+		<div class="eeslr-volume" style="position:absolute; top:0px; left:185px;"><i id="sound4" class="volumneicons fa fa-volume-off fa-2x" aria-hidden="true"></i></div>
+		<div class="tog-btn-pad">
+			<div class="toggle-btn flooding">
+				<input type="radio" id="Daily" name="flooding" value="Daily"/>
+				<label for="Daily">Frequent</label>
+				<input type="radio" id="Weekly" name="flooding" value="Weekly"/>
+				<label for="Weekly">Semi-Frequent</label>
+				<input type="radio" id="Yearly" name="flooding" value="Yearly"/>
+				<label for="Yearly">Infrequent</label>
+				<input type="radio" id="Decadal" name="flooding" value="Decadal"/>
+				<label for="Decadal">Rarely</label>
+			</div>
 		</div>
-	</section>
-</div>
+	</div>
+	<div class="ref-cb-wrap">
+		<label class="form-component" for="reference-cb">
+			<input type="checkbox" id="reference-cb" name="reference-cb">
+			<div class="check"></div>
+			<span class="form-text">Show Reference Layers</span>
+		</label>
+	</div>
+	<div id="reference-wrap" class="reference-wrap">
+		<p>Boundaries</p>
+		<label class="form-component" for="ref1">
+			<input type="checkbox" value="Ahupuaa boundaries" id="ref1" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Ahupuaa boundaries</span>
+		</label><br>
+		<label class="form-component" for="ref2">
+			<input type="checkbox" value="Subwatersheds" id="ref2" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Subwatersheds</span>
+		</label><br>
+		<label class="form-component" for="ref3">
+			<input type="checkbox" value="Stream channels, DAR" id="ref3" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Stream channels, DAR</span>
+		</label><br>
+		<label class="form-component" for="ref4">
+			<input type="checkbox" value="Depth contours" id="ref4" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Depth contours</span>
+		</label><br>
+		<p>Nearshore Characteristics</p>
+		<label class="form-component" for="ref5">
+			<input type="checkbox" value="Intertidal, sandy" id="ref5" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Intertidal, sandy</span>
+		</label><br>
+		<label class="form-component" for="ref6">
+			<input type="checkbox" value="Intertidal Rocky" id="ref6" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Intertidal Rocky</span>
+		</label><br>
+		<label class="form-component" for="ref7">
+			<input type="checkbox" value="Wave exposure, marine" id="ref7" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Wave exposure, marine</span>
+		</label><br>
+		<label class="form-component" for="ref8">
+			<input type="checkbox" value="Benthic composition" id="ref8" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Benthic composition</span>
+		</label><br>
+		<label class="form-component" for="ref9">
+			<input type="checkbox" value="Benthic Structure" id="ref9" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Benthic Structure</span>
+		</label><br>
+		<p>Land Based Source Pollutants</p>
+		<label class="form-component" for="ref10">
+			<input type="checkbox" value="Nutrient discharge points" id="ref10" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Nutrient discharge points</span>
+		</label><br>
+		<label class="form-component" for="ref11">
+			<input type="checkbox" value="On site disposal systems" id="ref11" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">On site disposal systems</span>
+		</label><br>
+		<label class="form-component" for="ref12">
+			<input type="checkbox" value="Sediment export" id="ref12" name="ref-lyrs">
+			<div class="check"></div>
+			<span class="form-text">Sediment export</span>
+		</label>
+	</div>	
+	<div class="box-wrap">
+		<button id="summary" class="button button-default">View Summary</button>
+		<button id="methods" class="button button-default">View Methods</button>
+	</div>			
+</div>		
