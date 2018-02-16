@@ -7,7 +7,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 
 	return declare(null, { 
 		appSetup: function(t){
-			t.url = "http://dev.services.coastalresilience.org/arcgis/rest/services/Hawaii/EESLR/MapServer"
+			t.url = "http://services.coastalresilience.org/arcgis/rest/services/Hawaii/EESLR/MapServer"
 			t.dynamicLayer = new ArcGISDynamicMapServiceLayer(t.url);
 			t.map.addLayer(t.dynamicLayer);
 			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
