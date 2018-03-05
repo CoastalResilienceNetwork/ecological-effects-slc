@@ -15,15 +15,15 @@ function (
 	lang ) {
 	return declare(PluginBase, {
 		// The height and width are set here when an infographic is defined. When the user click Continue it rebuilds the app window with whatever you put in.
-		toolbarName:"Ecosystem Effects of Sea Level Change", allowIdentifyWhenActive:false, 
-		rendered:false, resizable:false, hasCustomPrint:false, size:'small', width:456, 
-		hasHelp:false, showServiceLayersInLegend: true,
+		toolbarName:"Ecosystem Effects of Sea Level Change", allowIdentifyWhenActive:false, hasCustomPrint:true, usePrintModal:true, printModalSize:[600,100], 
+		rendered:false, resizable:false, size:'small', hasHelp:false, showServiceLayersInLegend:true, 
 		// First function called when the user clicks the pluging icon. 
 		initialize: function (frameworkParameters) {
 			// Access framework parameters
 			declare.safeMixin(this, frameworkParameters);
 			// Define object to access global variables from JSON object. Only add variables to varObject.json that are needed by Save and Share. 
 			this.obj = dojo.eval("[" + obj + "]")[0];
+			this.render(frameworkParameters);			
 		},
 		// Called after initialize at plugin startup (why the tests for undefined). Also called after deactivate when user closes app by clicking X. 
 		hibernate: function () {
@@ -37,14 +37,6 @@ function (
 		},
 		// Called after hibernate at app startup. Calls the render function which builds the plugins elements and functions.   
 		activate: function (showHelpOnStart) {
-			//this.map.__proto__._params.maxZoom = 19;
-			if (this.rendered == false) {	
-				this.rendered = true;							
-				this.render();
-				$(this.printButton).hide();
-			}else{
-				
-			}
 			this.open = "yes";
 		},
 		showHelp: function(h){
@@ -73,11 +65,72 @@ function (
 			this.obj = state;
 		},
 		// Called when the user hits the print icon
-		beforePrint: function(printDeferred, $printArea, mapObject) {
-			printDeferred.resolve();
+		prePrintModal: function(preModalDeferred, $printSandbox, $modalSandbox, mapObject) {
+			$.get('plugins/ecological-effects-slc/html/print-form.html', function(html) {
+			    $modalSandbox.append(html);
+			})
+			$.get('plugins/ecological-effects-slc/html/print-page.html', function(html) {
+			    $printSandbox.append(html);
+			}).then(preModalDeferred.resolve());
 		},	
+		postPrintModal: function(postModalDeferred, $printSandbox, $modalSandbox, mapObject) {
+			//show risk variables or solutions
+			$(".prw").css("display","none");
+			if (this.selOptGroup == "Risk Variables"){
+				$(".risVarPrintWrap").show();
+			}else{
+				$(".selSolPrintWrap").show();
+			}
+			$(".print-selTop").html(this.selTop + "<br>" + this.obj.pools + " Pools - " + this.obj.year);
+			// show flood layers if on
+			if (this.obj.floodLayersOn == "yes"){
+				var fldType = "";
+				$(".flooding input[name=flooding]:checked").each(function(i,v){
+					fldType = $(v).next().html();
+				})
+				$(".print-lf-title").html(this.selTop + "<br>" + fldType + " Flooding - " + this.obj.year);
+				$(".likeFloodPrintWrap").show();
+			}	
+			// build legend
+			var legAr = this.legendArray;
+			// Loop through checked reference layer inputs to make legend			 	
+		 	$("#" + this.id + "reference-wrap input[name=ref-lyrs]:checked").each(function(i,v){
+		 		if (i == 0){
+		 			$("#refLayerLegend").append("<div style='font-weight:bold; text-decoration:underline; margin-right:5mm;'>Reference Layers</div>")
+		 		}
+		 		$.each(legAr,function(i1,v1){
+		 			// Does the checked value match a layer name?
+		 			if (v.value == v1.layerName){
+		 				// is it a single item legend
+		 				if (v1.legend.length == 1){
+		 					var leg = v1.legend[0]
+		 					$("#refLayerLegend").append("<div style='margin-top:3mm; margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + leg.imageData + "'> " + v1.layerName + "<div>")					
+		 				}
+		 				// is it a multiple item legend
+		 				if (v1.legend.length > 1){
+		 					$("#refLayerLegend").append("<div style='margin-top:3mm; margin-right:5mm;' id='lyr" + v1.layerId + "'>" + v1.layerName + "</div>")	
+		 					$.each(v1.legend,function(i2,v2){
+		 						$("#refLayerLegend").append("<div style='margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + v2.imageData + "'> " + v2.label + "<div>");
+		 					})
+		 				}		
+		 			}
+		 		})
+		 	})
+
+
+			window.setTimeout(function() {
+			    if (mapObject.updating) {
+			        var delayedPrint = mapObject.on('update-end', function() {
+			        	delayedPrint.remove();
+			            postModalDeferred.resolve();
+			        });
+			    } else {
+			        postModalDeferred.resolve();
+			    }
+			}, 500);
+		},
 		// Called by activate and builds the plugins elements and functions
-		render: function() {
+		render: function(frameworkParameters) {
 			//this.oid = -1;
 			//$('.basemap-selector').trigger('change', 3);
 			this.mapScale  = this.map.getScale();
@@ -106,7 +159,7 @@ function (
 
 			// Set up app and listeners
 			this.clicks.appSetup(this);
-			this.clicks.eventListeners(this);
+			
 			this.rendered = true;	
 		},
 	});

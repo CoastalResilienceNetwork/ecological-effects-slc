@@ -1,28 +1,35 @@
 ﻿@media print {
-	@page { 
+    @page { 
         size: portrait;
-		margin: 13mm 13mm 13mm 13mm;
-    }	
-    #plugin-print-preview-map {
-        visibility: visible;
-		width:1000px !important;
-		height:550px !important;
-		margin-left:100px;
-		position:absolute;
-		top:50px;
-		left:-20px;
-    }	
-	.pt{
-		visibility: visible;
-	}
-	.printCell{
-		background-color: #ddd !important;	
-		-webkit-print-color-adjust: exact; 
-	}	
-	table tbody tr td:before,
-    table tbody tr td:after {
-        content : "" ;
-        height : 4px ;
-        display : block ;
     }
+    #myPrintWrap{
+    	position:absolute !important; top:calc(100% - 140mm) !important; left:10mm !important; /*font-size:20pt;*/ display:flex; 
+    }    
+    #myPrintWrap h3{
+    	/*font-size:20pt !important;*/
+    }
+    #riskAndFloodLayerLegends{
+    	margin-right:10mm;
+    }
+    .likeFloodPrintWrap{
+    	margin-top:10mm;
+    }
+    #refLayerLegend{
+    	display:flex; flex-direction:column; flex-wrap:wrap; height:120mm; 
+    }
+    .pr-leg-wrap{
+        display:flex;
+    }
+    .pr-leg-box{
+        height:20px; width:20px; margin-right:5px;  
+    } 
+    .pr-und-bld{
+    	font-weight:bold; text-decoration:underline; margin-bottom:1mm;
+    } 
+    #legend-container-0 {
+        display:none !important;
+    }
+   	#plugin-print-sandbox #map-0 {
+		display:block; position:absolute; top:20mm; height:calc(100% - 182mm); width:calc(100% - 30mm); left:10mm; overflow:hidden;
+	}
 }

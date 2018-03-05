@@ -1,3 +1,8 @@
+.tinner{
+	max-height:120px !important;
+}
+
+
 select {
     width: 92px;
     white-space:pre-wrap;
@@ -51,13 +56,14 @@ select {
 	height:15px; width:15px; margin-right:5px; margin-left:5px; margin-top:2px;
 }
 .box-wrap{
-	margin-top:20px; text-align:center; border-top:1px solid #ddd; padding-top:20px;
+	text-align:center; border-top:1px solid #ddd; height:54px; padding-top:10px; display:none;
+	position:absolute; bottom:0; left:0; width:100%; background:#fbfbfb; box-shadow:0 -1px 1px rgba(16,22,26,0.2);
 }
 .ref-cb-wrap{
 	margin-top:1.5rem;
 }
 .reference-wrap{
-	padding-left:22px; display:none;
+	padding-left:22px; display:none; margin-bottom:64px;
 }
 .reference-wrap p{
 	text-decoration:underline; margin-bottom:0.5rem;

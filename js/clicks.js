@@ -16,10 +16,6 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 				$("#" + t.id + t.obj.flooding).prop('checked',true);
 				$("#" + t.id + t.obj.year).prop('checked',true);
 				$("#" + t.id + t.obj.pools).prop('checked',true);
-				// create and add flood layer
-				t.floodLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
-				t.map.addLayer(t.floodLayer);
-				t.floodLayer.setVisibleLayers(t.obj.floodLayers);
 				// create and add ref layers
 				t.refLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
 				t.map.addLayer(t.refLayer);
@@ -29,6 +25,9 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 						setTimeout(function () { $("#legend-container-0").hide() }, 250);
 					}
 				})
+				t.refLayer.on("load",function() {
+					t.clicks.eventListeners(t);
+				});	
 				// Save and Share Handler					
 				if (t.obj.stateSet == "yes"){
 					$("#" + t.id + "topSelect").val(t.obj.topVal).trigger("chosen:updated").change();
@@ -50,14 +49,32 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 					setTimeout(function () { $("#legend-container-0").hide() }, 250);
 				}
 			})
-			
+			// Grab reference layer legend for print
+			var url = t.url + "/legend";  
+			var requestHandle = esri.request({  
+				"url": url,  
+			    "content": {  
+			    	"f": "json"  
+				},  
+			  	"callbackParamName": "callback"  
+			 });  
+			 requestHandle.then(function(legendArray){
+			 	t.legendArray = legendArray.layers;
+			 }, function(x){console.log("legend query failed")});			
 		},
 		eventListeners: function(t){
 			// top chosen menu
 			$("#" + t.id + "topSelect").chosen({disable_search: true, allow_single_deselect:false, width:"90%"})
 				.change(function(c){
+					// create and add flood layer
+					t.floodLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
+					t.map.addLayer(t.floodLayer);
+					t.floodLayer.setVisibleLayers(t.obj.floodLayers);
 					var v = c.target.value;
+					t.selTop =  $("#" + t.id + "topSelect option:selected").text() 
+					t.selOptGroup = $(c.currentTarget.options[c.currentTarget.selectedIndex]).closest('optgroup').prop('label');
 					$(".vs-wrap").slideDown();
+					$(".box-wrap").show();
 					t.clicks.getValues(t);
 					t.map.on("extent-change",function(){
 						t.clicks.getValues(t);
@@ -117,7 +134,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 					$("#" + t.id + "legend-wrap").hide();
 					$("#" + t.id + "controls-both").hide();
 					t.obj.floodLayersOn = "no";
-					t.obj.floodLayers = [-1];
+					t.obj.floodLayers = [];
 					t.floodLayer.setVisibleLayers(t.obj.floodLayers);
 				}
 			})
@@ -215,7 +232,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 			t.dynamicLayer.setLayerDefinitions(t.layerDefs);
 			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
 			if (t.obj.floodLayersOn == "no"){
-				t.obj.floodLayers = [-1];
+				t.obj.floodLayers = [];
 			}
 			t.floodLayer.setVisibleLayers(t.obj.floodLayers);
 			// run query to update graph

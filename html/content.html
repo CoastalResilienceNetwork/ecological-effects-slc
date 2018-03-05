@@ -2,6 +2,7 @@
 Dijit ContentPane to hold all the elements. The ContentPane is assigned a dynamic id upon creation. The render function
 takes the ContentPane id and prepends it to every element with a declared id in this HTML before the elements are created.
 The unique ContentPane id makes all the element ids unique and prevents duplicate id errors across other apps.-->
+<div class="tempLegend"></div>
 <h3>Select a Risk Variable or Solution<img src="plugins/ecological-effects-slc/images/infoBlue.png" alt="show Risk Variable and Solutions info" class="h3InfoIcon" style="margin-bottom:-2px;"><img src="plugins/ecological-effects-slc/images/infoCloseBlue.png" alt="hide choose scenario year info" class="hideH3InfoIcon" style="margin-bottom:-2px;"></h3>
 <div class="h3Info">
 	Cumulative risk scores represent a pools percent risk out of the total possible risk calculated by: ([Risk1] + [Risk2] + [Risk3] + [Risk4]/160)*100) This is the sum of the risk scores for each individual risk variable divided by the highest possible risk score, in this case 160 (4 variables with 40 as the highest value). "low" represents pools with scores &#60;20%, "medium" &#62;=20 - 60%, and "high" &#62; 60%. For more information on how each individual risk and solution variable was calculated, visit the <a href="http://coastalresilience.org/project/ecosystem-effects-of-sea-level-change/" target="_blank" alt="Coastal Resilience Apps page">Coastal Resilience Apps</a> page.
@@ -141,12 +142,12 @@ The unique ContentPane id makes all the element ids unique and prevents duplicat
 	<div id="reference-wrap" class="reference-wrap">
 		<p>Boundaries</p>
 		<label class="form-component" for="ref1">
-			<input type="checkbox" value="Ahupuaa boundaries" id="ref1" name="ref-lyrs">
+			<input type="checkbox" value="Ahupuaa boundaries" id="ref1" name="ref-lyrs" checked>
 			<div class="check"></div>
 			<span class="form-text">Ahupuaa boundaries</span>
 		</label><br>
 		<label class="form-component" for="ref2">
-			<input type="checkbox" value="Subwatersheds" id="ref2" name="ref-lyrs">
+			<input type="checkbox" value="Subwatersheds" id="ref2" name="ref-lyrs" checked>
 			<div class="check"></div>
 			<span class="form-text">Subwatersheds</span>
 		</label><br>
@@ -177,7 +178,7 @@ The unique ContentPane id makes all the element ids unique and prevents duplicat
 			<span class="form-text">Wave exposure, marine</span>
 		</label><br>
 		<label class="form-component" for="ref8">
-			<input type="checkbox" value="Benthic composition" id="ref8" name="ref-lyrs">
+			<input type="checkbox" value="Benthic composition" id="ref8" name="ref-lyrs" checked>
 			<div class="check"></div>
 			<span class="form-text">Benthic composition</span>
 		</label><br>
@@ -202,9 +203,10 @@ The unique ContentPane id makes all the element ids unique and prevents duplicat
 			<div class="check"></div>
 			<span class="form-text">Sediment export</span>
 		</label>
-	</div>	
-	<div class="box-wrap">
-		<button id="summary" class="button button-default">View Summary</button>
-		<button id="methods" class="button button-default">View Methods</button>
 	</div>			
+</div>	
+<div class="box-wrap">
+	<button id="summary" class="button button-default">View Summary</button>
+	<button class="button button-default plugin-print">Print</button>
+	<button id="methods" class="button button-default">View Methods</button>
 </div>		
