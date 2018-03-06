@@ -2,6 +2,9 @@
     @page { 
         size: portrait;
     }
+    body{
+    	font-family:Arial !important;
+    }
     #myPrintWrap{
     	position:absolute !important; top:calc(100% - 140mm) !important; left:10mm !important; /*font-size:20pt;*/ display:flex; 
     }    
