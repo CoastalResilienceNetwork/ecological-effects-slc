@@ -88,7 +88,7 @@ function (
 				$(".flooding input[name=flooding]:checked").each(function(i,v){
 					fldType = $(v).next().html();
 				})
-				$(".print-lf-title").html(this.selTop + "<br>" + fldType + " Flooding - " + this.obj.year);
+				$(".print-lf-title").html("Likelyhood of Flooding<br>" + fldType + " Flooding - " + this.obj.year);
 				$(".likeFloodPrintWrap").show();
 			}	
 			// build legend
