@@ -74,6 +74,12 @@ function (
 			}).then(preModalDeferred.resolve());
 		},	
 		postPrintModal: function(postModalDeferred, $printSandbox, $modalSandbox, mapObject) {
+			// get title
+			var ttl = $("#getSlcPrintTitle").val();
+			if (ttl.length == 0){
+				ttl = "Ecosystem Effects of Sea Level Change"
+			}	
+			$("#slcPrintTitle").html( ttl );
 			//show risk variables or solutions
 			$(".prw").css("display","none");
 			if (this.selOptGroup == "Risk Variables"){
@@ -96,21 +102,25 @@ function (
 			// Loop through checked reference layer inputs to make legend			 	
 		 	$("#" + this.id + "reference-wrap input[name=ref-lyrs]:checked").each(function(i,v){
 		 		if (i == 0){
-		 			$("#refLayerLegend").append("<div style='font-weight:bold; text-decoration:underline; margin-right:5mm;'>Reference Layers</div>")
+		 			$("#riskAndFloodLayerLegends").append("<div style='font-weight:bold; text-decoration:underline; margin-right:5mm; margin-top:5mm;'>Reference Layers</div>")
 		 		}
 		 		$.each(legAr,function(i1,v1){
 		 			// Does the checked value match a layer name?
 		 			if (v.value == v1.layerName){
 		 				// is it a single item legend
 		 				if (v1.legend.length == 1){
-		 					var leg = v1.legend[0]
-		 					$("#refLayerLegend").append("<div style='margin-top:3mm; margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + leg.imageData + "'> " + v1.layerName + "<div>")					
+		 					var leg = v1.legend[0];
+		 					var mt = "3mm"
+		 					if (i1 == 0){
+		 						mt = "0mm"
+		 					}
+		 					$("#riskAndFloodLayerLegends").append("<div style='margin-top:" + mt + "; margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + leg.imageData + "'> " + v1.layerName + "<div>")					
 		 				}
 		 				// is it a multiple item legend
 		 				if (v1.legend.length > 1){
-		 					$("#refLayerLegend").append("<div style='margin-top:3mm; margin-right:5mm;' id='lyr" + v1.layerId + "'>" + v1.layerName + "</div>")	
+		 					$("#riskAndFloodLayerLegends").append("<div style='margin-top:3mm; margin-right:5mm;' id='lyr" + v1.layerId + "'>" + v1.layerName + "</div>")	
 		 					$.each(v1.legend,function(i2,v2){
-		 						$("#refLayerLegend").append("<div style='margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + v2.imageData + "'> " + v2.label + "<div>");
+		 						$("#riskAndFloodLayerLegends").append("<div style='margin-right:5mm;'><img style='vertical-align:top' src='data:image/png;base64," + v2.imageData + "'> " + v2.label + "<div>");
 		 					})
 		 				}		
 		 			}

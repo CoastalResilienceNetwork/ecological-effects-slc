@@ -1,24 +1,18 @@
 ﻿@media print {
-    @page { 
-        size: portrait;
-    }
     body{
     	font-family:Arial !important;
     }
-    #myPrintWrap{
-    	position:absolute !important; top:calc(100% - 140mm) !important; left:10mm !important; /*font-size:20pt;*/ display:flex; 
-    }    
-    #myPrintWrap h3{
-    	/*font-size:20pt !important;*/
+    #plugin-print-sandbox{
+    	display:flex !important; flex-direction:column !important;
     }
     #riskAndFloodLayerLegends{
-    	margin-right:10mm;
+    	margin-right:10mm; display:flex; flex-direction:column; flex-wrap:wrap; height:100mm; margin-top:5mm; 
     }
     .likeFloodPrintWrap{
-    	margin-top:10mm;
+    	margin-top:5mm;
     }
-    #refLayerLegend{
-    	display:flex; flex-direction:column; flex-wrap:wrap; height:120mm; 
+    #slcPrintTitle{
+    	font-size:20pt; font-weight:bold; width:100%; text-align:center; margin-top:5mm;
     }
     .pr-leg-wrap{
         display:flex;
@@ -32,7 +26,10 @@
     #legend-container-0 {
         display:none !important;
     }
-   	#plugin-print-sandbox #map-0 {
-		display:block; position:absolute; top:20mm; height:calc(100% - 182mm); width:calc(100% - 30mm); left:10mm; overflow:hidden;
+    #plugin-print-sandbox #map-0 {
+		position:relative !important; margin-bottom:0 !important;
+	}
+	#map-print-sandbox{
+		height:4in !important; width:4in !important;
 	}
 }
