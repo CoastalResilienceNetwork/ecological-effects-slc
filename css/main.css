@@ -1,8 +1,9 @@
-.tinner{
-	max-height:120px !important;
+#slcModalWrapper div{
+	font-size:17px; margin-bottom:20px;
 }
-
-
+#slcModalWrapper input{
+	width:90%;
+}
 select {
     width: 92px;
     white-space:pre-wrap;
