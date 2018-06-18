@@ -23,7 +23,13 @@ function (
 			declare.safeMixin(this, frameworkParameters);
 			// Define object to access global variables from JSON object. Only add variables to varObject.json that are needed by Save and Share. 
 			this.obj = dojo.eval("[" + obj + "]")[0];
-			this.render(frameworkParameters);			
+			this.render(frameworkParameters);	
+			// Remove save and share control
+			$(".i18n").each(function(i,v){
+				if ($(v).html() == "Save &amp; Share"){
+					$(v).parent().hide()
+				}
+			})		
 		},
 		// Called after initialize at plugin startup (why the tests for undefined). Also called after deactivate when user closes app by clicking X. 
 		hibernate: function () {
