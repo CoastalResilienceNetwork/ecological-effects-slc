@@ -19,7 +19,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 				// create and add ref layers
 				t.refLayer = new ArcGISDynamicMapServiceLayer(t.url, {opacity:0.6});
 				t.map.addLayer(t.refLayer);
-				t.refLayer.setVisibleLayers(t.obj.refLayers);
+				t.refLayer.setVisibleLayers([-1]);
 				t.refLayer.on("update",function() {
 					if ( t.obj.refLayers.length == 0 ){
 						setTimeout(function () { $("#legend-container-0").hide() }, 250);
@@ -27,21 +27,28 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 				})
 				t.refLayer.on("load",function() {
 					t.clicks.eventListeners(t);
-				});	
-				// Save and Share Handler					
-				if (t.obj.stateSet == "yes"){
-					$("#" + t.id + "topSelect").val(t.obj.topVal).trigger("chosen:updated").change();
-					if ( t.obj.floodLayersOn == "yes" ){
-						$("#" + t.id + "flooding-cb").trigger("click");
+					// Save and Share Handler					
+					if (t.obj.stateSet == "yes"){
+						$("#" + t.id + "topSelect").val(t.obj.topVal).trigger("chosen:updated").trigger("change");
+						if ( t.obj.floodLayersOn == "yes" ){
+							$("#" + t.id + "flooding-cb").trigger("click");
+						}
+						if ( t.obj.refNames.length > 0 ){
+							$("#" + t.id + "reference-cb").trigger("click");
+							t.obj.refLayers = [];
+							$.each(t.obj.refNames,function(i,v){
+								$("#" + t.id + "reference-wrap input[value='" + v +"']").trigger("click");
+							})
+						}
+						//extent
+						var extent = new Extent(t.obj.extent.xmin, t.obj.extent.ymin, t.obj.extent.xmax, t.obj.extent.ymax, new SpatialReference({ wkid:4326 }))
+						t.map.setExtent(extent, true);
+							
+						t.obj.stateSet = "no";
+					}else{
+						$("#show-single-plugin-mode-help").trigger("click")
 					}
-					//extent
-					var extent = new Extent(t.obj.extent.xmin, t.obj.extent.ymin, t.obj.extent.xmax, t.obj.extent.ymax, new SpatialReference({ wkid:4326 }))
-					t.map.setExtent(extent, true);
-						
-					t.obj.stateSet = "no";
-				}else{
-					$("#show-single-plugin-mode-help").trigger("click")
-				}	
+				});		
 			});	
 			// hide legend if reference layers are not on
 			t.dynamicLayer.on("update",function() {
@@ -170,12 +177,19 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 						lid = v.id;
 					}
 				})
+				var i1 = t.obj.refNames.indexOf(c.currentTarget.value)
 				if ( c.currentTarget.checked ){
 					t.obj.refLayers.push(lid)
+					if (i1 == -1){
+						t.obj.refNames.push(c.currentTarget.value)
+					}
 				}else{
 					var index = t.obj.refLayers.indexOf(lid)
 					if ( index > -1 ){
 						t.obj.refLayers.splice(index,1)
+					}
+					if (i1 > -1){
+						t.obj.refNames.splice(i1,1)
 					}
 				}
 				t.refLayer.setVisibleLayers(t.obj.refLayers);
@@ -306,14 +320,14 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 			t.audios[1].addEventListener("ended", function() {t.audios[2].play()});
 			t.audios[2].addEventListener("ended", function() {t.clicks.resetAudios(t)});
 			
-			t.audios[4].addEventListener("ended", function() {t.audios[3].play(); console.log("ended 4")});
-			t.audios[3].addEventListener("ended", function() {t.audios[5].play(); console.log("ended 3")});
-			t.audios[5].addEventListener("ended", function() {t.audios[6].play(); console.log("ended 5")});
-			t.audios[6].addEventListener("ended", function() {t.audios[10].play(); console.log("ended 6")});
+			t.audios[4].addEventListener("ended", function() {t.audios[3].play();});
+			t.audios[3].addEventListener("ended", function() {t.audios[5].play();});
+			t.audios[5].addEventListener("ended", function() {t.audios[6].play();});
+			t.audios[6].addEventListener("ended", function() {t.audios[10].play();});
 			
-			t.audios[10].addEventListener("ended", function() {t.audios[11].play(); console.log("ended 10")});
-			t.audios[11].addEventListener("ended", function() {t.audios[12].play(); console.log("ended 11")});
-			t.audios[12].addEventListener("ended", function() {t.clicks.resetAudios(t); console.log("ended 12")});
+			t.audios[10].addEventListener("ended", function() {t.audios[11].play();});
+			t.audios[11].addEventListener("ended", function() {t.audios[12].play();});
+			t.audios[12].addEventListener("ended", function() {t.clicks.resetAudios(t);});
 			
 			t.audios[8].addEventListener("ended", function() {t.audios[9].play()});
 			t.audios[9].addEventListener("ended", function() {t.clicks.resetAudios(t)});
@@ -324,7 +338,6 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 			// Sound section clicks
 			$('.eeslr-volume').on('click',function(c){
 				var tid = c.target.id.replace(t.id,"");
-				//console.log($(c.target.id));
 				if (tid == "sound1") {if (t.audios[0].duration > 0 && !t.audios[0].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[0].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}}
 				if (tid == "sound2") { if (t.audios[0].duration > 0 && !t.audios[4].paused) { t.clicks.resetAudios(t) }else { t.clicks.resetAudios(t); t.audios[4].play(); $(c.target).removeClass("fa-volume-off"); $(c.target).addClass("fa-volume-up");}}
 				if (tid == "sound4") {if (t.audios[0].duration > 0 && !t.audios[8].paused) {t.clicks.resetAudios(t)} else {t.clicks.resetAudios(t); t.audios[8].play(); $(c.target).removeClass("fa-volume-off");$(c.target).addClass("fa-volume-up");}}
