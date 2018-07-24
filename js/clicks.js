@@ -30,6 +30,10 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 					// Save and Share Handler					
 					if (t.obj.stateSet == "yes"){
 						$("#" + t.id + "topSelect").val(t.obj.topVal).trigger("chosen:updated").trigger("change");
+						// pools visible
+						if (!t.obj.poolsToggle){
+							$("#" + t.id + "poolsToggle").trigger("click")
+						}
 						if ( t.obj.floodLayersOn == "yes" ){
 							$("#" + t.id + "flooding-cb").trigger("click");
 						}
@@ -43,7 +47,6 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 						//extent
 						var extent = new Extent(t.obj.extent.xmin, t.obj.extent.ymin, t.obj.extent.xmax, t.obj.extent.ymax, new SpatialReference({ wkid:4326 }))
 						t.map.setExtent(extent, true);
-							
 						t.obj.stateSet = "no";
 					}else{
 						$("#show-single-plugin-mode-help").trigger("click")
@@ -93,7 +96,16 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 						}
 					})
 				});
-			
+			// Show Pools
+			$("#" + t.id + "poolsToggle").click(function(c){
+				if (c.currentTarget.checked){
+					t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
+					t.obj.poolsToggle = true;
+				}else{
+					t.dynamicLayer.setVisibleLayers([-1]);
+					t.obj.poolsToggle = false;
+				}
+			})
 			// Bar chart
 			// symbolize x-axis
 			var l = $('.vertAndLines').find('.dashedLines');  
@@ -244,7 +256,12 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 			t.layerDefs[t.obj.visibleLayers[0]] = w;
 			t.layerDefs[t.obj.visibleLayers[1]] = w;
 			t.dynamicLayer.setLayerDefinitions(t.layerDefs);
-			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
+			// handle poolsToggle checkbox status
+			if (t.obj.poolsToggle){
+				t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
+			}else{
+				t.dynamicLayer.setVisibleLayers([-1])
+			}
 			if (t.obj.floodLayersOn == "no"){
 				t.obj.floodLayers = [];
 			}

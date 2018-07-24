@@ -35,6 +35,15 @@ select {
 .vs-wrap h4{
 	margin-bottom:0.4rem;
 }
+.ptWrap{
+	margin:5px 0 0 10px;
+}
+.ptWrap .form-component{
+	margin-bottom:0;
+}
+.ptWrap label{
+    color:#101d28; font-size:14px;
+}
 .fld-cb-wrap label, .ref-cb-wrap label{
 	color:#101d28; font-size:14px;
 }

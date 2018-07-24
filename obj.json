@@ -9,5 +9,6 @@
 	"flooding": "Daily",
 	"topVal": "",
 	"year": "Current",
-	"pools": "All"
+	"pools": "All",
+	"poolsToggle": true
 }
