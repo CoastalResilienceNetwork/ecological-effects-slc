@@ -27,7 +27,7 @@ select {
 	display:none; margin:0px 10px 10px 5px; line-height:15px; 
 }
 .vs-wrap{
-	display:none;
+	display:none; margin-bottom:80px;
 }
 .vs-wrap input[type="radio"][disabled] + label {
 	text-decoration:line-through; background:#efefef; cursor:not-allowed;
