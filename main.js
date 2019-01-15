@@ -173,6 +173,9 @@ function (
 			this.clicks.appSetup(this);
 			
 			this.rendered = true;	
+
+			$("#toggle-plugin-container").trigger("click");
+			$("#toggle-plugin-container").trigger("click");
 		},
 	});
 });
