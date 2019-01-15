@@ -517,5 +517,8 @@ font-size: 15px;
 	padding-left: 20px;
 }
 
-
+ @media only screen and (max-width: 800px) {
+ 	.box-wrap {
+ 		display:none !important;
+ 	}
 

@@ -7,7 +7,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 
 	return declare(null, { 
 		appSetup: function(t){
-			t.url = "http://services.coastalresilience.org/arcgis/rest/services/Hawaii/EESLR/MapServer"
+			t.url = "https://dev-services.coastalresilience.org/arcgis/rest/services/Hawaii/EESLR/MapServer"
 			t.dynamicLayer = new ArcGISDynamicMapServiceLayer(t.url);
 			t.map.addLayer(t.dynamicLayer);
 			t.dynamicLayer.setVisibleLayers(t.obj.visibleLayers);
@@ -160,10 +160,10 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 
 			// summary and methods buttons
 			$("#" + t.id + "summary").click(function(){
-				window.open("http://media.coastalresilience.org/HI/EESLC_Summary.pdf")
+				window.open("https://media.coastalresilience.org/HI/EESLC_Summary.pdf")
 			})
 			$("#" + t.id + "methods").click(function(){
-				window.open("http://media.coastalresilience.org/HI/EESLC_Methods.pdf")
+				window.open("https://media.coastalresilience.org/HI/EESLC_Methods.pdf")
 			})	
 
 			// Set up audio portion
@@ -315,21 +315,21 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 		},
 		startAudio: function(t){
 			// setup sounds      
-			var audio1 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/1.mp3");
-			var audio2 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/2.mp3");
-			var audio3 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/3.mp3");
+			var audio1 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/1.mp3");
+			var audio2 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/2.mp3");
+			var audio3 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_1/3.mp3");
 			
-			var audio4 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/4.mp3");
-			var audio5 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/5.mp3");
-			var audio6 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/6.mp3");
-			var audio7 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/7.mp3");
+			var audio4 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/4.mp3");
+			var audio5 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/5.mp3");
+			var audio6 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/6.mp3");
+			var audio7 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_2/7.mp3");
 			
-			var audio8 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/8.mp3");
-			var audio9 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/9.mp3");
-			var audio10 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/10.mp3");
-			var audio11 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/11.mp3");
-			var audio12 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/12.mp3");
-			var audio13 = new Audio("http://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/13.mp3");
+			var audio8 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/8.mp3");
+			var audio9 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/9.mp3");
+			var audio10 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/10.mp3");
+			var audio11 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/11.mp3");
+			var audio12 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/12.mp3");
+			var audio13 = new Audio("https://media.coastalresilience.org/HI/EESLC_Narration/Audio_Icon_3/13.mp3");
 			
 			t.audios = new Array(audio1,audio2,audio3,audio4,audio5,audio6,audio7,audio8,audio9,audio10,audio11,audio12,audio13);
 			
