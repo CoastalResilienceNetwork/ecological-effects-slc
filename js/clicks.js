@@ -220,7 +220,6 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 					}
 				})
 			})
-			console.log(t.obj.year)
 			if (t.obj.pools == "Future"){
 				$("#" + t.id + "Current").prop("disabled", true);
 			}
