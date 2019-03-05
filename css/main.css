@@ -84,7 +84,7 @@ select {
 	text-align:center; margin-top:1.5rem;
 }
 .barGraphWrap{
-	display:inline-block; position:relative; height:277px; margin-left:18px;
+	display:inline-block; position:relative; height:277px; margin-left:18px; margin-top:25px;
 }
 .vertandLines{
 	display:inline-block; position:relative; z-index:10;
