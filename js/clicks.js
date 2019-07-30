@@ -49,7 +49,7 @@ function ( declare, Query, QueryTask, FeatureLayer, ArcGISDynamicMapServiceLayer
 						t.map.setExtent(extent, true);
 						t.obj.stateSet = "no";
 					}else{
-						$("#show-single-plugin-mode-help").trigger("click")
+						$("#show-single-plugin-mode-help a").trigger("click")
 					}
 				});		
 			});	
